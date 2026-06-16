@@ -1,0 +1,140 @@
+---
+import QRCode from "qrcode";
+
+interface Props { t: any; locale: "uk" | "en" | "ru" }
+const { t, locale } = Astro.props;
+
+// USDT TRC20 — единый кошелёк Дома. Не локализуется.
+const WALLET_USDT_TRC20 = "TXnkWUeYCreKS6K8NV1JNFzV4u9ZHNANud";
+
+// SVG QR генерируется в момент `astro build` (раз на сборку, без запросов
+// к внешним сервисам, без third-party fetch — приватность сохраняется).
+// margin=2 даёт «тихую зону» по краю; color пергамент/умбра — попадание в палитру Дома.
+const qrSvg = await QRCode.toString(WALLET_USDT_TRC20, {
+  type: "svg",
+  margin: 2,
+  color: { dark: "#2A1F15", light: "#F4EDDF" },
+  errorCorrectionLevel: "M",
+});
+
+const sup = t.support;
+---
+
+<section id="support" class="scroll-mt-24 bg-[color:var(--color-parchment)]">
+  <div class="max-w-3xl mx-auto px-6 py-20 md:py-28">
+    <p class="eyebrow">{sup.eyebrow}</p>
+    <h1 class="mt-4 font-serif text-4xl md:text-5xl">{sup.title}</h1>
+
+    <div class="mt-10 space-y-7 text-lg md:text-xl leading-relaxed text-[color:var(--color-umber)]">
+      <p class="lead">{sup.lead}</p>
+      <p>{sup.p1}</p>
+      <p>{sup.p2}</p>
+    </div>
+
+    <h2 class="mt-16 font-serif text-2xl md:text-3xl">{sup.how_title}</h2>
+    <p class="mt-4 text-base md:text-lg leading-relaxed text-[color:var(--color-umber)]">
+      {sup.how_lead}
+    </p>
+
+    {/* Реквизиты — карточка с QR и адресом. Один кошелёк USDT TRC20. */}
+    <div
+      class="mt-10 rounded-md border border-[color:var(--color-parchment-deep)] bg-[color:var(--color-parchment-soft)] p-6 md:p-10"
+    >
+      <div class="flex flex-col md:flex-row md:items-start gap-8 md:gap-10">
+        {/* QR — slot фиксированной ширины, чтобы не плыл на мобиле */}
+        <div class="shrink-0 mx-auto md:mx-0">
+          <div
+            class="w-[200px] h-[200px] md:w-[220px] md:h-[220px] rounded-md overflow-hidden border border-[color:var(--color-parchment-deep)] bg-[color:var(--color-parchment)] p-2"
+            aria-label={sup.qr_alt}
+            set:html={qrSvg}
+          />
+        </div>
+
+        {/* Адрес + copy button + метка сети */}
+        <div class="flex-1 min-w-0">
+          <p class="font-sans text-xs uppercase tracking-widest text-[color:var(--color-sepia)]">
+            {sup.network_label}
+          </p>
+          <p class="mt-1 font-serif text-lg">USDT · TRC20</p>
+
+          <p class="mt-6 font-sans text-xs uppercase tracking-widest text-[color:var(--color-sepia)]">
+            {sup.address_label}
+          </p>
+          <code
+            id="wallet-address"
+            class="mt-2 block break-all rounded bg-[color:var(--color-parchment)] border border-[color:var(--color-parchment-deep)] px-3 py-2 font-mono text-sm md:text-base text-[color:var(--color-umber)]"
+          >
+            {WALLET_USDT_TRC20}
+          </code>
+
+          <button
+            id="copy-wallet-btn"
+            type="button"
+            data-default-label={sup.copy_btn}
+            data-copied-label={sup.copy_btn_copied}
+            class="mt-4 inline-flex items-center gap-2 rounded-md border border-[color:var(--color-house-burgundy)] bg-[color:var(--color-house-burgundy)] text-[color:var(--color-parchment)] px-5 py-2 text-sm font-sans uppercase tracking-widest hover:opacity-90 transition-opacity"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+            </svg>
+            <span data-copy-label>{sup.copy_btn}</span>
+          </button>
+
+          <p class="mt-6 text-sm md:text-base text-[color:var(--color-umber)]/80 leading-relaxed">
+            {sup.warning}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {/* Контактный email для вопросов о поддержке */}
+    <p class="mt-12 text-base md:text-lg leading-relaxed text-[color:var(--color-umber)]">
+      {sup.questions_prefix}
+      <a
+        href="mailto:house@groznov.net"
+        class="underline decoration-[color:var(--color-sepia)] underline-offset-4 hover:decoration-[color:var(--color-house-burgundy)]"
+      >house@groznov.net</a>.
+    </p>
+
+    <p class="mt-10 italic text-[color:var(--color-sepia)] text-lg">
+      {sup.thanks}
+    </p>
+
+    <p class="mt-16">
+      <a
+        href={locale === "uk" ? "/" : "/" + locale + "/"}
+        class="font-sans text-xs uppercase tracking-widest text-[color:var(--color-sepia)] hover:text-[color:var(--color-house-burgundy)]"
+      >{sup.back}</a>
+    </p>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    const btn = document.getElementById("copy-wallet-btn");
+    const addr = document.getElementById("wallet-address");
+    if (!btn || !addr) return;
+    const labelEl = btn.querySelector("[data-copy-label]");
+    const defaultLabel = btn.dataset.defaultLabel || "";
+    const copiedLabel = btn.dataset.copiedLabel || "";
+    btn.addEventListener("click", async () => {
+      const text = (addr.textContent || "").trim();
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (_e) {
+        // Fallback для старых браузеров и iOS Safari в insecure context
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        ta.style.position = "fixed";
+        ta.style.left = "-9999px";
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand("copy"); } catch (__) { /* noop */ }
+        document.body.removeChild(ta);
+      }
+      if (labelEl) labelEl.textContent = copiedLabel;
+      setTimeout(() => { if (labelEl) labelEl.textContent = defaultLabel; }, 1800);
+    });
+  })();
+</script>

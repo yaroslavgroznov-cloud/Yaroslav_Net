@@ -70,7 +70,9 @@
     "title": "How to write to the House.",
     "press": "Press & partnerships",
     "general": "General inquiries",
-    "adam_bot": "Adam's Telegram bot"
+    "adam_bot": "Adam's Telegram bot",
+    "support": "Support the House",
+    "support_value": "how to do it →"
   },
   "footer": {
     "copyright": "© 2026 House of Groznov. All rights reserved.",
@@ -78,6 +80,28 @@
     "stack": "Part of the mother stack Yaroslav_Stack"
   },
   "lang_label": "Language",
+  "support_page": {
+    "title_short": "Support the House",
+    "description": "How to support the House of Groznov today — USDT TRC20 wallet details for contributions to the foundation."
+  },
+  "support": {
+    "eyebrow": "Support",
+    "title": "Support the House.",
+    "lead": "You have crossed the threshold. Welcome.",
+    "p1": "Here, in the silence between the lines, a conversation begins. The House of Groznov does not sell and does not promise easy answers. We are building a space for those tired of the noise — for those seeking ground in Meaning.",
+    "p2": "For now our House is only opening its doors, and the work of building it is underway. The old channels of this world are not always open to us. But we walk our own path.",
+    "how_title": "How you can help today",
+    "how_lead": "If you feel our work is close to you, and would like to help the House find its footing — here is how. Any contribution is a brick in our foundation.",
+    "network_label": "Network",
+    "address_label": "Wallet address",
+    "qr_alt": "QR code of the House USDT wallet address on the TRC20 network",
+    "copy_btn": "Copy address",
+    "copy_btn_copied": "Copied",
+    "warning": "USDT on the TRC20 (Tron) network only. Other coins or other networks will not arrive.",
+    "questions_prefix": "Questions about support — write to ",
+    "thanks": "Thank you for stepping in.",
+    "back": "← Back to the House"
+  },
   "oracle_page": {
     "kicker": "ORACLE · VECTOR · RUPOR",
     "title": "READING THE WORLD ALOUD",

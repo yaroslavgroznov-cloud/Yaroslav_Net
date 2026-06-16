@@ -1,11 +1,15 @@
 ---
-interface Props { t: any; }
-const { t } = Astro.props;
+interface Props { t: any; locale: "uk" | "en" | "ru"; }
+const { t, locale } = Astro.props;
+
+// Префикс локали для путей внутри сайта: uk — корень, остальные — /en, /ru.
+const localePrefix = locale === "uk" ? "" : "/" + locale;
 
 const items = [
   { label: t.contact.press,    value: "press@groznov.net",   href: "mailto:press@groznov.net" },
   { label: t.contact.general,  value: "contact@groznov.net", href: "mailto:contact@groznov.net" },
   { label: t.contact.adam_bot, value: "@AdamGroznovBot",     href: "https://t.me/AdamGroznovBot" },
+  { label: t.contact.support,  value: t.contact.support_value, href: localePrefix + "/support" },
 ];
 ---
 
