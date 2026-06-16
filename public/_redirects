@@ -1,0 +1,13 @@
+# CF Pages — server-side redirects.
+# Docs: https://developers.cloudflare.com/pages/configuration/redirects/
+#
+# SOF РМУ (2026-06-16 Юлин censor): публичная страница законсервирована,
+# в Projects карточка убрана, /sof-rmu/* удалены. Чтобы избежать SPA fallback
+# на главную (= duplicate-content для GSC) — постоянный редирект на /oracle,
+# который занял публичное место SOF. Все 3 локали зеркалят соответствующий путь.
+/sof-rmu      /oracle      301
+/sof-rmu/*    /oracle      301
+/en/sof-rmu   /en/oracle   301
+/en/sof-rmu/* /en/oracle   301
+/ru/sof-rmu   /ru/oracle   301
+/ru/sof-rmu/* /ru/oracle   301
