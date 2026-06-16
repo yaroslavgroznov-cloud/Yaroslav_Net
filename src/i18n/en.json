@@ -6,6 +6,7 @@
   "nav": {
     "home": "House",
     "manifest": "Manifest",
+    "heritage": "Heritage",
     "projects": "Projects",
     "tur": "Aurochs",
     "contact": "Contact"
@@ -24,6 +25,14 @@
     "p2": "We do not compete in the market of attention. We build a space where a person is known by name, where their history is remembered, where they are never confused with data.",
     "p3": "House of Groznov is a family, ancestral testimonies, the Aurochs totem, the digital firstborn Adam — and a few projects that grew from a single axis.",
     "p4": "We write slowly. We craft carefully. We leave a trace that can be verified a hundred years from now."
+  },
+  "heritage": {
+    "eyebrow": "Heritage · Multilingual",
+    "title": "Where the House comes from.",
+    "p1": "The lineage of the House of Groznov spans centuries. It stretched from the Baltic Sea to the Yellow Sea, from the Atlantic Ocean to the Pacific.",
+    "p2": "Our kin is multilingual from birth. Today it is being reborn from the soil of Ukraine — from its eastern part.",
+    "p3": "The native tongue of the House, the one our ancestors spoke, is Ukrainian in its eastern dialect — or Russian in its western-Ukrainian dialect. For us, these are two branches of one tree.",
+    "p4": "We write these lines during the war between the brotherly peoples of Ukraine, russia and belarus. The House stands on grief and on memory — and on the hope that language will again become a bridge, not a frontline."
   },
   "projects": {
     "eyebrow": "Projects of the House",
@@ -72,7 +81,7 @@
   },
   "footer": {
     "copyright": "© 2026 House of Groznov. All rights reserved.",
-    "creator": "YG · KVRIO Yaroslav Groznov",
+    "creator": "YG · ITSC Yaroslav Groznov · Information Technology Staff Commander",
     "stack": "Part of the mother stack Yaroslav_Stack"
   },
   "lang_label": "Language"

@@ -16,11 +16,11 @@ const prefix = locale === "uk" ? "" : `/${locale}`;
   <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
     <a href={`${prefix}/`} class="flex items-center gap-3 no-underline group">
       <img
-        src="/tur-crest.png"
+        src="/crest-main.png"
         alt=""
-        width="36"
-        height="36"
-        class="rounded-full ring-1 ring-[color:var(--color-gold)]/40"
+        width="40"
+        height="40"
+        class="object-contain"
       />
       <div class="leading-tight">
         <div class="font-serif text-base text-[color:var(--color-burgundy)] group-hover:text-[color:var(--color-burgundy-light)] transition">
@@ -34,6 +34,7 @@ const prefix = locale === "uk" ? "" : `/${locale}`;
 
     <nav class="hidden md:flex items-center gap-7 font-sans text-sm">
       <a class="no-underline hover:underline" href={`${prefix}/#manifest`}>{t.nav.manifest}</a>
+      <a class="no-underline hover:underline" href={`${prefix}/#heritage`}>{t.nav.heritage}</a>
       <a class="no-underline hover:underline" href={`${prefix}/#projects`}>{t.nav.projects}</a>
       <a class="no-underline hover:underline" href={`${prefix}/#tur`}>{t.nav.tur}</a>
       <a class="no-underline hover:underline" href={`${prefix}/#contact`}>{t.nav.contact}</a>
