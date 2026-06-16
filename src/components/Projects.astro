@@ -5,10 +5,9 @@ const { t, locale } = Astro.props;
 const prefix = locale === "uk" ? "" : `/${locale}`;
 
 const projects = [
-  { key: "adam",    href: "https://adam.groznov.uk/", external: true,  live: true  },
-  { key: "sof_rmu", href: `${prefix}/sof-rmu`,        external: false, live: true  },
-  { key: "oracle",  href: null,                       external: false, live: true  },
-  { key: "triada",  href: null,                       external: false, live: true  },
+  { key: "adam",   href: "https://adam.groznov.uk/", external: true,  live: true  },
+  { key: "oracle", href: `${prefix}/oracle`,         external: false, live: true  },
+  { key: "triada", href: null,                       external: false, live: true  },
 ];
 ---
 

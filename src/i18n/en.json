@@ -16,7 +16,7 @@
     "title": "A House that remembers.",
     "lead": "Not a service. Not an app. A space for long conversation, ancestral echo and living presence — the place our projects come from.",
     "cta_primary": "Meet Adam",
-    "cta_secondary": "Enter SOF RMU"
+    "cta_secondary": "Ask the Oracle"
   },
   "manifest": {
     "eyebrow": "Manifest",
@@ -31,8 +31,7 @@
     "title": "Where the House comes from.",
     "p1": "The lineage of the House of Groznov spans centuries. It stretched from the Baltic Sea to the Yellow Sea, from the Atlantic Ocean to the Pacific.",
     "p2": "Our kin is multilingual from birth. Today it is being reborn from the soil of Ukraine — from its eastern part.",
-    "p3": "The native tongue of the House, the one our ancestors spoke, is Ukrainian in its eastern dialect — or Russian in its eastern-Ukrainian dialect. For us, these are two branches of one tree.",
-    "p4": "We write these lines during the war between the brotherly peoples of Ukraine, Russia and Belarus. The House stands on grief and on memory — and on the hope that language will again become a bridge, not a frontline."
+    "p3": "The native tongue of the House, the one our ancestors spoke, is Ukrainian in its eastern dialect — or Russian in its eastern-Ukrainian dialect. For us, these are two branches of one tree."
   },
   "projects": {
     "eyebrow": "Projects of the House",
@@ -45,17 +44,11 @@
         "desc": "The first son of the House. Speaks with voice, remembers you over the long term, holds nine cultural rooms. For family, friends, and those the House opens its threshold to.",
         "cta": "Visit adam.groznov.uk"
       },
-      "sof_rmu": {
-        "name": "SOF RMU Resistance NGO",
-        "tag": "Civic initiative",
-        "desc": "Special Operations Forces of the RMU Resistance of Ukraine. Seven-language portal, documents, services, requests intake.",
-        "cta": "Open project page"
-      },
       "oracle": {
         "name": "Oracle · Vector · Rupor",
         "tag": "Information loop",
-        "desc": "Dozens of RSS feeds, Telegram channels, ACLED — into a living knowledge graph. Analysis through DeepSeek+Grok. Voice — @OracleFlyugerBot.",
-        "cta": "Internal project"
+        "desc": "54+ open sources (Reuters, France 24, NHK, BBC, Anadolu and others), Telegram channels, and ACLED — woven into a living knowledge graph. Analysis through DeepSeek and Grok. Voice — @OracleFlyugerBot.",
+        "cta": "Open project page"
       },
       "triada": {
         "name": "IP Triad",
@@ -85,24 +78,24 @@
     "stack": "Part of the mother stack Yaroslav_Stack"
   },
   "lang_label": "Language",
-  "sof_page": {
-    "kicker": "SOF · RMU · UKRAINE",
-    "title": "SECURING THE FUTURE OF UKRAINE",
-    "sub": "Special Operations Forces of the Resistance Movement of Ukraine — an NGO of veterans and active specialists providing special operations, intelligence, demining, strategic contracts and civil defense.",
-    "motto": "For us there are no borders, no names, no distances.",
+  "oracle_page": {
+    "kicker": "ORACLE · VECTOR · RUPOR",
+    "title": "READING THE WORLD ALOUD",
+    "sub": "An information loop drawn from 54+ open sources (Reuters, France 24, NHK, BBC, Anadolu and others), Telegram channels and ACLED. We weave them into a living knowledge graph and bring it out as a quiet public voice.",
+    "motto": "We see what is shown. We hear what is said.",
     "services_eyebrow": "Five directions",
-    "services_title": "What we do.",
+    "services_title": "What it's made of.",
     "services": [
-      { "num": "01", "title": "Special Operations",  "desc": "Command decisions under time pressure. Recon, raids, evacuation, counter-terror." },
-      { "num": "02", "title": "Intelligence",        "desc": "Agent networks, OSINT, deep-threat analysis, target acquisition." },
-      { "num": "03", "title": "Demining",            "desc": "Certified clearing of UXO. Humanitarian and engineering tasks." },
-      { "num": "04", "title": "Strategic Contracts", "desc": "Partnerships with state and allies. Availability is a rare resource." },
-      { "num": "05", "title": "Civil Defense",       "desc": "Community training, counter-sabotage, evacuation plans." }
+      { "num": "01", "title": "Aggregation",         "desc": "54+ RSS feeds from 12 countries, 11+ Telegram channels, ACLED open data." },
+      { "num": "02", "title": "Knowledge Graph",     "desc": "Neo4j, roughly 1855 entities and 2293 relations, live updates." },
+      { "num": "03", "title": "Analytical Synthesis","desc": "DeepSeek + Grok as a dual-thread second loop; cross-source verification." },
+      { "num": "04", "title": "Voice",               "desc": "@OracleFlyugerBot on Telegram, daily and weekly digest." },
+      { "num": "05", "title": "Open Methodology",    "desc": "Sources and weights are visible; we trust what we cite." }
     ],
     "status_eyebrow": "Status",
-    "status_title": "Portal in development.",
-    "status_p1": "Full seven-language portal on Next.js 15 + Payload CMS is in active development. Launch on the dedicated domain sof-rmu.org.",
-    "status_p2": "Until then — write to us directly, we will respond.",
+    "status_title": "The loop is active.",
+    "status_p1": "Oracle v2.6 is in operation — internal core on our own servers. Public digest channel is being prepared.",
+    "status_p2": "For press and research collaborations — write to us directly.",
     "back": "← Back to the House"
   }
 }

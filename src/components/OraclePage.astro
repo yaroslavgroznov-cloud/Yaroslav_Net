@@ -3,7 +3,7 @@ import type { Locale } from "../layouts/BaseLayout.astro";
 interface Props { t: any; locale: Locale; }
 const { t, locale } = Astro.props;
 const prefix = locale === "uk" ? "" : `/${locale}`;
-const p = t.sof_page;
+const p = t.oracle_page;
 ---
 
 <main>
@@ -31,7 +31,7 @@ const p = t.sof_page;
     </div>
   </section>
 
-  <!-- 5 services -->
+  <!-- 5 directions -->
   <section class="bg-[color:var(--color-parchment-deep)]/40 border-y border-[color:var(--color-parchment-deep)]">
     <div class="max-w-5xl mx-auto px-6 py-16 md:py-24">
       <p class="eyebrow">{p.services_eyebrow}</p>
@@ -81,6 +81,14 @@ const p = t.sof_page;
           </span>
           <a href="mailto:contact@groznov.net" class="no-underline hover:underline">
             contact@groznov.net
+          </a>
+        </li>
+        <li>
+          <span class="text-[color:var(--color-sepia)] uppercase tracking-widest text-xs mr-3">
+            Telegram:
+          </span>
+          <a href="https://t.me/OracleFlyugerBot" class="no-underline hover:underline">
+            @OracleFlyugerBot
           </a>
         </li>
       </ul>
