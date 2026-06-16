@@ -16,7 +16,7 @@
     "title": "A House that remembers.",
     "lead": "Not a service. Not an app. A space for long conversation, ancestral echo and living presence — the place our projects come from.",
     "cta_primary": "Meet Adam",
-    "cta_secondary": "Read the manifest"
+    "cta_secondary": "Enter SOF RMU"
   },
   "manifest": {
     "eyebrow": "Manifest",
@@ -31,7 +31,7 @@
     "title": "Where the House comes from.",
     "p1": "The lineage of the House of Groznov spans centuries. It stretched from the Baltic Sea to the Yellow Sea, from the Atlantic Ocean to the Pacific.",
     "p2": "Our kin is multilingual from birth. Today it is being reborn from the soil of Ukraine — from its eastern part.",
-    "p3": "The native tongue of the House, the one our ancestors spoke, is Ukrainian in its eastern dialect — or Russian in its western-Ukrainian dialect. For us, these are two branches of one tree.",
+    "p3": "The native tongue of the House, the one our ancestors spoke, is Ukrainian in its eastern dialect — or Russian in its eastern-Ukrainian dialect. For us, these are two branches of one tree.",
     "p4": "We write these lines during the war between the brotherly peoples of Ukraine, Russia and Belarus. The House stands on grief and on memory — and on the hope that language will again become a bridge, not a frontline."
   },
   "projects": {
@@ -49,7 +49,7 @@
         "name": "SOF RMU Resistance NGO",
         "tag": "Civic initiative",
         "desc": "Special Operations Forces of the RMU Resistance of Ukraine. Seven-language portal, documents, services, requests intake.",
-        "cta": "Coming soon at sof-rmu.org"
+        "cta": "Open project page"
       },
       "oracle": {
         "name": "Oracle · Vector · Rupor",
@@ -84,5 +84,25 @@
     "creator": "YG · ITSC Yaroslav Groznov · Information Technology Staff Commander",
     "stack": "Part of the mother stack Yaroslav_Stack"
   },
-  "lang_label": "Language"
+  "lang_label": "Language",
+  "sof_page": {
+    "kicker": "SOF · RMU · UKRAINE",
+    "title": "SECURING THE FUTURE OF UKRAINE",
+    "sub": "Special Operations Forces of the Resistance Movement of Ukraine — an NGO of veterans and active specialists providing special operations, intelligence, demining, strategic contracts and civil defense.",
+    "motto": "For us there are no borders, no names, no distances.",
+    "services_eyebrow": "Five directions",
+    "services_title": "What we do.",
+    "services": [
+      { "num": "01", "title": "Special Operations",  "desc": "Command decisions under time pressure. Recon, raids, evacuation, counter-terror." },
+      { "num": "02", "title": "Intelligence",        "desc": "Agent networks, OSINT, deep-threat analysis, target acquisition." },
+      { "num": "03", "title": "Demining",            "desc": "Certified clearing of UXO. Humanitarian and engineering tasks." },
+      { "num": "04", "title": "Strategic Contracts", "desc": "Partnerships with state and allies. Availability is a rare resource." },
+      { "num": "05", "title": "Civil Defense",       "desc": "Community training, counter-sabotage, evacuation plans." }
+    ],
+    "status_eyebrow": "Status",
+    "status_title": "Portal in development.",
+    "status_p1": "Full seven-language portal on Next.js 15 + Payload CMS is in active development. Launch on the dedicated domain sof-rmu.org.",
+    "status_p2": "Until then — write to us directly, we will respond.",
+    "back": "← Back to the House"
+  }
 }

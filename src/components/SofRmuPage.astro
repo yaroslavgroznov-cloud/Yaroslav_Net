@@ -1,0 +1,100 @@
+---
+import type { Locale } from "../layouts/BaseLayout.astro";
+interface Props { t: any; locale: Locale; }
+const { t, locale } = Astro.props;
+const prefix = locale === "uk" ? "" : `/${locale}`;
+const p = t.sof_page;
+---
+
+<main>
+  <!-- Hero -->
+  <section class="relative">
+    <div class="max-w-5xl mx-auto px-6 pt-16 pb-12 md:pt-24 md:pb-16">
+      <a
+        href={`${prefix}/`}
+        class="font-sans text-xs uppercase tracking-widest text-[color:var(--color-gold-deep)] no-underline hover:underline"
+      >
+        {p.back}
+      </a>
+
+      <p class="eyebrow mt-10">{p.kicker}</p>
+
+      <h1 class="mt-4 font-serif text-4xl md:text-6xl text-[color:var(--color-burgundy)] leading-[1.05] uppercase">
+        {p.title}
+      </h1>
+
+      <p class="mt-8 lead max-w-3xl">{p.sub}</p>
+
+      <blockquote class="mt-10 border-l-4 border-[color:var(--color-burgundy)]/60 pl-6 italic font-serif text-xl md:text-2xl text-[color:var(--color-sepia)] max-w-3xl">
+        «{p.motto}»
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- 5 services -->
+  <section class="bg-[color:var(--color-parchment-deep)]/40 border-y border-[color:var(--color-parchment-deep)]">
+    <div class="max-w-5xl mx-auto px-6 py-16 md:py-24">
+      <p class="eyebrow">{p.services_eyebrow}</p>
+      <h2 class="mt-4 font-serif text-3xl md:text-5xl">{p.services_title}</h2>
+
+      <div class="mt-12 divide-y divide-[color:var(--color-parchment-deep)]">
+        {p.services.map((s: any) => (
+          <article class="grid grid-cols-[auto_1fr] gap-6 md:gap-10 py-7">
+            <span class="font-serif text-3xl md:text-4xl text-[color:var(--color-gold-deep)] tabular-nums">
+              {s.num}
+            </span>
+            <div>
+              <h3 class="font-serif text-xl md:text-2xl text-[color:var(--color-burgundy)]">
+                {s.title}
+              </h3>
+              <p class="mt-2 text-base md:text-lg leading-relaxed text-[color:var(--color-umber)]">
+                {s.desc}
+              </p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Status -->
+  <section class="bg-[color:var(--color-parchment-soft)]">
+    <div class="max-w-3xl mx-auto px-6 py-16 md:py-24">
+      <p class="eyebrow">{p.status_eyebrow}</p>
+      <h2 class="mt-4 font-serif text-3xl md:text-4xl">{p.status_title}</h2>
+
+      <p class="mt-6 text-lg leading-relaxed">{p.status_p1}</p>
+      <p class="mt-4 text-lg leading-relaxed">{p.status_p2}</p>
+
+      <ul class="mt-10 space-y-3 font-sans text-sm">
+        <li>
+          <span class="text-[color:var(--color-sepia)] uppercase tracking-widest text-xs mr-3">
+            {t.contact.press}:
+          </span>
+          <a href="mailto:press@groznov.net" class="no-underline hover:underline">
+            press@groznov.net
+          </a>
+        </li>
+        <li>
+          <span class="text-[color:var(--color-sepia)] uppercase tracking-widest text-xs mr-3">
+            {t.contact.general}:
+          </span>
+          <a href="mailto:contact@groznov.net" class="no-underline hover:underline">
+            contact@groznov.net
+          </a>
+        </li>
+      </ul>
+
+      <div class="divider mt-14">✦</div>
+
+      <div class="mt-10 text-center">
+        <a
+          href={`${prefix}/`}
+          class="no-underline inline-block px-6 py-3 border border-[color:var(--color-gold)] text-[color:var(--color-gold-deep)] hover:bg-[color:var(--color-parchment-deep)] transition tracking-wide uppercase font-sans text-sm"
+        >
+          {p.back}
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
