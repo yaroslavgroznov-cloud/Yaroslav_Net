@@ -1,0 +1,25 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Hero from "../../components/Hero.astro";
+import Manifest from "../../components/Manifest.astro";
+import Projects from "../../components/Projects.astro";
+import TurSection from "../../components/TurSection.astro";
+import Contacts from "../../components/Contacts.astro";
+import Footer from "../../components/Footer.astro";
+import t from "../../i18n/ru.json";
+
+const locale = "ru" as const;
+---
+
+<BaseLayout locale={locale}>
+  <Header locale={locale} t={t} />
+  <main>
+    <Hero locale={locale} t={t} />
+    <Manifest t={t} />
+    <Projects t={t} />
+    <TurSection t={t} />
+    <Contacts t={t} />
+  </main>
+  <Footer t={t} />
+</BaseLayout>

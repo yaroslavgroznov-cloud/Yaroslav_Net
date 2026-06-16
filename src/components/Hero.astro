@@ -1,0 +1,50 @@
+---
+import type { Locale } from "../layouts/BaseLayout.astro";
+
+interface Props {
+  locale: Locale;
+  t: any;
+}
+const { locale, t } = Astro.props;
+const prefix = locale === "uk" ? "" : `/${locale}`;
+---
+
+<section class="relative overflow-hidden">
+  <div class="max-w-6xl mx-auto px-6 pt-20 pb-24 md:pt-32 md:pb-32">
+    <div class="page-frame serif-corners p-8 md:p-16 bg-[color:var(--color-parchment-soft)]">
+      <p class="eyebrow text-center">{t.hero.eyebrow}</p>
+
+      <div class="mt-6 flex justify-center">
+        <img
+          src="/tur-crest.png"
+          alt={locale === "en" ? "Aurochs — totem of the House" : "Тур — тотем Дома"}
+          width="120"
+          height="120"
+          class="opacity-90"
+          loading="eager"
+        />
+      </div>
+
+      <h1 class="mt-8 text-center font-serif text-5xl md:text-7xl text-[color:var(--color-burgundy)] leading-[1.05]">
+        {t.hero.title}
+      </h1>
+
+      <p class="mt-8 lead text-center max-w-2xl mx-auto">{t.hero.lead}</p>
+
+      <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center font-sans text-sm">
+        <a
+          href="https://adam.groznov.uk/"
+          class="no-underline inline-block px-6 py-3 bg-[color:var(--color-burgundy)] text-[color:var(--color-parchment-soft)] hover:bg-[color:var(--color-burgundy-light)] transition tracking-wide uppercase"
+        >
+          {t.hero.cta_primary} →
+        </a>
+        <a
+          href={`${prefix}/#manifest`}
+          class="no-underline inline-block px-6 py-3 border border-[color:var(--color-gold)] text-[color:var(--color-gold-deep)] hover:bg-[color:var(--color-parchment-deep)] transition tracking-wide uppercase"
+        >
+          {t.hero.cta_secondary}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

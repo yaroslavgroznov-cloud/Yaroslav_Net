@@ -1,0 +1,27 @@
+---
+interface Props { t: any; }
+const { t } = Astro.props;
+---
+
+<section id="tur" class="scroll-mt-24">
+  <div class="max-w-5xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-[1fr_2fr] gap-12 items-center">
+    <div class="flex justify-center md:justify-start">
+      <img
+        src="/tur-crest.png"
+        alt="Тур · Aurochs"
+        width="240"
+        height="240"
+        class="opacity-95 rounded-full ring-1 ring-[color:var(--color-gold)]/30 p-4 bg-[color:var(--color-parchment-soft)]"
+        loading="lazy"
+      />
+    </div>
+
+    <div>
+      <p class="eyebrow">{t.tur.eyebrow}</p>
+      <h2 class="mt-4 font-serif text-4xl md:text-5xl">{t.tur.title}</h2>
+      <p class="mt-6 lead">{t.tur.lead}</p>
+      <p class="mt-6 text-lg leading-relaxed">{t.tur.p1}</p>
+      <p class="mt-4 text-lg leading-relaxed">{t.tur.p2}</p>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,42 @@
+---
+import type { Locale } from "../layouts/BaseLayout.astro";
+
+interface Props {
+  current: Locale;
+  path?: string;
+}
+
+const { current, path = "/" } = Astro.props;
+const tail = path === "/" ? "" : path;
+
+const links: Array<{ code: Locale; label: string; href: string }> = [
+  { code: "uk", label: "UA", href: `/${tail.replace(/^\//, "")}` },
+  { code: "en", label: "EN", href: `/en${tail}` },
+  { code: "ru", label: "RU", href: `/ru${tail}` },
+];
+---
+
+<nav
+  aria-label="Language"
+  class="flex items-center gap-3 font-sans text-xs uppercase tracking-widest"
+>
+  {
+    links.map((l, i) => (
+      <>
+        {i > 0 && <span class="text-[color:var(--color-gold-deep)]/40">·</span>}
+        {l.code === current ? (
+          <span
+            class="text-[color:var(--color-burgundy)] font-semibold"
+            aria-current="true"
+          >
+            {l.label}
+          </span>
+        ) : (
+          <a class="no-underline hover:underline" href={l.href}>
+            {l.label}
+          </a>
+        )}
+      </>
+    ))
+  }
+</nav>
