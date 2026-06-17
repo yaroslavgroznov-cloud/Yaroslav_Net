@@ -1,5 +1,6 @@
 ---
 import LangSwitcher from "./LangSwitcher.astro";
+import ThemeToggle from "./ThemeToggle.astro";
 import type { Locale } from "../layouts/BaseLayout.astro";
 
 interface Props {
@@ -40,6 +41,9 @@ const prefix = locale === "uk" ? "" : `/${locale}`;
       <a class="no-underline hover:underline" href={`${prefix}/#contact`}>{t.nav.contact}</a>
     </nav>
 
-    <LangSwitcher current={locale} path={path} />
+    <div class="flex items-center gap-3 sm:gap-4">
+      <ThemeToggle t={t} />
+      <LangSwitcher current={locale} path={path} />
+    </div>
   </div>
 </header>

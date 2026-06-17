@@ -81,6 +81,11 @@
     "stack": "Part of the mother stack Yaroslav_Stack"
   },
   "lang_label": "Language",
+  "theme": {
+    "auto": "Theme: auto",
+    "dark": "Theme: night",
+    "light": "Theme: day"
+  },
   "support_page": {
     "title_short": "Support the House",
     "description": "How to support the House of Groznov today — USDT TRC20 wallet details for contributions to the foundation."

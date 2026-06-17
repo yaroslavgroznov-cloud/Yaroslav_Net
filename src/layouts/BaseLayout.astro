@@ -66,6 +66,29 @@ const jsonLd = {
     <meta name="theme-color" content="#2A1F15" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
+    {/* Тема — определяем ДО первого рендера, чтобы не было flash светлой темы
+        перед переключением в тёмную. Source-of-truth: localStorage('groznov.theme').
+        Три префы: 'auto' (по часу: 19-7 = dark) / 'dark' / 'light'.
+        Тот же подход, что useDarkMode на adam.groznov.uk, в vanilla JS для Astro. */}
+    <script is:inline>
+      (function () {
+        var KEY = "groznov.theme";
+        var pref = null;
+        try { pref = localStorage.getItem(KEY); } catch (_) {}
+        if (pref !== "dark" && pref !== "light") pref = "auto";
+        var isDark;
+        if (pref === "dark") isDark = true;
+        else if (pref === "light") isDark = false;
+        else {
+          var h = new Date().getHours();
+          isDark = h >= 19 || h < 7;
+        }
+        var root = document.documentElement;
+        root.setAttribute("data-theme", isDark ? "dark" : "light");
+        root.setAttribute("data-theme-pref", pref);
+      })();
+    </script>
+
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />

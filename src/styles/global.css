@@ -144,6 +144,11 @@ a:hover {
    Подход: переопределяем семантику палитры — компоненты не правим.
    Все они читают `var(--color-*)`, так что инверсия происходит автоматически.
 
+   Source-of-truth: `<html data-theme="dark|light">`. Атрибут ставится
+   inline-скриптом в <head> до первого рендера (см. BaseLayout.astro).
+   Три префы юзера: 'auto' (по часу: 19-7 = dark), 'dark', 'light' —
+   сохраняются в localStorage под ключом `groznov.theme`.
+
    Логика инверсии:
    - pergament-слой (фон страницы, фон карточек) → umber-слой
    - umber-слой (фон footer, тёмный текст)        → pergament-слой
@@ -152,34 +157,30 @@ a:hover {
      для контраста ≥ 4.5:1 WCAG AA на umber-deep фоне.
    - Акценты (burgundy-light, gold, terracotta) остаются — они уже яркие.
 */
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Поверхности */
-    --color-parchment:        #1F1611;  /* было #F4EDDF — стало umber-deep */
-    --color-parchment-soft:   #2A1F15;  /* было #FBF7EC — стало umber */
-    --color-parchment-deep:   #3A2D1F;  /* было #E8DDC7 — стало umber-soft, для бордюров */
+:root[data-theme="dark"] {
+  /* Поверхности */
+  --color-parchment:        #1F1611;  /* было #F4EDDF — стало umber-deep */
+  --color-parchment-soft:   #2A1F15;  /* было #FBF7EC — стало umber */
+  --color-parchment-deep:   #3A2D1F;  /* было #E8DDC7 — стало umber-soft, для бордюров */
 
-    /* Текст */
-    --color-umber:            #F4EDDF;  /* было #2A1F15 — стало parchment */
-    --color-umber-deep:       #FBF7EC;  /* было #1F1611 — стало parchment-soft */
-    --color-umber-soft:       #E8DDC7;  /* для тёмного Footer'а: bg инвертируется в светлый */
+  /* Текст */
+  --color-umber:            #F4EDDF;  /* было #2A1F15 — стало parchment */
+  --color-umber-deep:       #FBF7EC;  /* было #1F1611 — стало parchment-soft */
+  --color-umber-soft:       #E8DDC7;  /* для тёмного Footer'а: bg инвертируется в светлый */
 
-    /* Приглушённый текст */
-    --color-sepia:            #C4A98B;  /* было #5C4633 — стало sepia-light */
-    --color-text-muted:       #B8A380;  /* было #5A4530 — стало ochre-soft */
-    --color-muted-warm:       #C4A98B;
+  /* Приглушённый текст */
+  --color-sepia:            #C4A98B;  /* было #5C4633 — стало sepia-light */
+  --color-text-muted:       #B8A380;  /* было #5A4530 — стало ochre-soft */
+  --color-muted-warm:       #C4A98B;
 
-    /* Акценты — повышаем читаемость на тёмном */
-    --color-burgundy:         #8E2832;  /* было #6B1C23 — стало burgundy-light, контраст ≥ 4.5:1 */
-    --color-gold-deep:        #C9A227;  /* было #8B6F1F — стало gold, eyebrow и ссылки яркими */
-  }
+  /* Акценты — повышаем читаемость на тёмном */
+  --color-burgundy:         #8E2832;  /* было #6B1C23 — стало burgundy-light, контраст ≥ 4.5:1 */
+  --color-gold-deep:        #C9A227;  /* было #8B6F1F — стало gold, eyebrow и ссылки яркими */
 
-  html {
-    color-scheme: dark;
-  }
+  color-scheme: dark;
+}
 
-  /* Тонкая правка: карточка проекта в dark — рамка явная, но не кричит. */
-  .project-card:hover {
-    box-shadow: 0 8px 24px -12px rgba(201, 162, 39, 0.20);
-  }
+/* Карточка проекта в dark — рамка явная, но не кричит. */
+:root[data-theme="dark"] .project-card:hover {
+  box-shadow: 0 8px 24px -12px rgba(201, 162, 39, 0.20);
 }

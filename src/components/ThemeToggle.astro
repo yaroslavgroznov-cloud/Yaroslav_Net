@@ -1,0 +1,95 @@
+---
+// ThemeToggle — 2026-06-17. Кнопка переключения темы.
+// Логика идентична useDarkMode на adam.groznov.uk:
+//   Auto (по часу: 19-7 = dark) → Dark → Light → Auto …
+// LocalStorage key: 'groznov.theme'. Source-of-truth: <html data-theme-pref="...">.
+// Иконка — солнце (одна на все 3 режима, как у Адама), подпись меняется.
+
+interface Props { t: any; }
+const { t } = Astro.props;
+
+const labels = {
+  auto: t.theme.auto,
+  dark: t.theme.dark,
+  light: t.theme.light,
+};
+---
+
+<button
+  id="theme-toggle"
+  type="button"
+  aria-label={labels.auto}
+  title={labels.auto}
+  class="inline-flex items-center gap-2 px-2.5 py-1.5 rounded-md border border-transparent hover:border-[color:var(--color-parchment-deep)] hover:bg-[color:var(--color-parchment-soft)] transition-colors font-sans text-xs uppercase tracking-widest text-[color:var(--color-sepia)]"
+>
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.7"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <circle cx="12" cy="12" r="4" />
+    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+  </svg>
+  <span data-theme-label class="hidden sm:inline">{labels.auto}</span>
+</button>
+
+<script is:inline define:vars={{ labels }}>
+  (function () {
+    var KEY = "groznov.theme";
+    var btn = document.getElementById("theme-toggle");
+    if (!btn) return;
+    var labelEl = btn.querySelector("[data-theme-label]");
+    var root = document.documentElement;
+
+    // Эффективная dark/light по preference + час.
+    function effectiveIsDark(pref) {
+      if (pref === "dark") return true;
+      if (pref === "light") return false;
+      var h = new Date().getHours();
+      return h >= 19 || h < 7;
+    }
+
+    function applyPref(pref) {
+      if (pref === "auto") {
+        try { localStorage.removeItem(KEY); } catch (_) {}
+      } else {
+        try { localStorage.setItem(KEY, pref); } catch (_) {}
+      }
+      var isDark = effectiveIsDark(pref);
+      root.setAttribute("data-theme", isDark ? "dark" : "light");
+      root.setAttribute("data-theme-pref", pref);
+      var lbl = labels[pref] || labels.auto;
+      btn.setAttribute("aria-label", lbl);
+      btn.setAttribute("title", lbl);
+      if (labelEl) labelEl.textContent = lbl;
+      // Broadcast для других вкладок и иных toggle'ов на странице
+      try { window.dispatchEvent(new Event("groznov-theme-change")); } catch (_) {}
+    }
+
+    // Синхронизация подписи с тем, что inline-скрипт уже выставил в <head>.
+    var initialPref = root.getAttribute("data-theme-pref") || "auto";
+    var initialLbl = labels[initialPref] || labels.auto;
+    btn.setAttribute("aria-label", initialLbl);
+    btn.setAttribute("title", initialLbl);
+    if (labelEl) labelEl.textContent = initialLbl;
+
+    btn.addEventListener("click", function () {
+      var current = root.getAttribute("data-theme-pref") || "auto";
+      var next = current === "auto" ? "dark" : current === "dark" ? "light" : "auto";
+      applyPref(next);
+    });
+
+    // Слушаем изменения из других вкладок (storage event) и из этой же страницы.
+    window.addEventListener("storage", function (e) {
+      if (e.key !== KEY) return;
+      var pref = e.newValue === "dark" || e.newValue === "light" ? e.newValue : "auto";
+      applyPref(pref);
+    });
+  })();
+</script>
