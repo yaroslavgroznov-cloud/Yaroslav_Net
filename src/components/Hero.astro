@@ -15,14 +15,20 @@ const prefix = locale === "uk" ? "" : `/${locale}`;
       <p class="eyebrow text-center">{t.hero.eyebrow}</p>
 
       <div class="mt-6 flex justify-center">
-        <img
-          src="/crest-main.png"
-          alt={locale === "en" ? "Coat of arms of the House of Groznov" : "Герб Дома Грозновых"}
-          width="220"
-          height="180"
-          class="object-contain"
-          loading="eager"
-        />
+        <a
+          href={`${prefix}/about`}
+          class="inline-block transition-transform hover:scale-[1.03]"
+          aria-label={t.hero.crest_link_label}
+        >
+          <img
+            src="/crest-main.png"
+            alt={locale === "en" ? "Coat of arms of the House of Groznov" : "Герб Дома Грозновых"}
+            width="220"
+            height="180"
+            class="object-contain"
+            loading="eager"
+          />
+        </a>
       </div>
 
       <h1 class="mt-8 text-center font-serif text-5xl md:text-7xl text-[color:var(--color-burgundy)] leading-[1.05]">

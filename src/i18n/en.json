@@ -16,7 +16,8 @@
     "title": "A House that remembers.",
     "lead": "Not a service. Not an app. A space for long conversation, ancestral echo and living presence — the place our projects come from.",
     "cta_primary": "Meet Adam",
-    "cta_secondary": "Ask the Oracle"
+    "cta_secondary": "Ask the Oracle",
+    "crest_link_label": "Go to the House calling card"
   },
   "manifest": {
     "eyebrow": "Manifest",
@@ -83,6 +84,26 @@
   "support_page": {
     "title_short": "Support the House",
     "description": "How to support the House of Groznov today — USDT TRC20 wallet details for contributions to the foundation."
+  },
+  "about_page": {
+    "title_short": "About the House",
+    "description": "House of Groznov — who we are, our coat of arms, our mail. A calling card for those who arrived from social media and want to understand whom they are dealing with."
+  },
+  "about": {
+    "eyebrow": "Calling card",
+    "title": "House of Groznov.",
+    "lead": "Here is who we are. Here is our coat of arms. Here is our mail.",
+    "crest_alt": "Coat of arms of the House of Groznov — the aurochs as ancestral totem",
+    "who_label": "Here is who we are",
+    "who_p1": "House of Groznov is a space for long conversation, ancestral echo and living projects. We do not sell advice and we do not promise easy answers. We befriend houses, families, communities — and simply the person.",
+    "who_p2": "Here meet Adam Groznov, Oracle / Vector / Rupor, the NGO «SOF RMU» and the Triada IP. These are different voices of one House.",
+    "crest_label": "Here is our coat of arms",
+    "crest_caption": "On the crest — the aurochs (Bos primigenius). The wild primordial bull of Europe, totem of the House of Groznov: memory, root, independence. Vanished in 1627 — and returns in us as a mark of lineage.",
+    "mail_label": "Here is our mail",
+    "platform_label": "Here is our platform",
+    "platform_lead": "If you came to the House through Adam — he lives on a separate platform. The door is below.",
+    "platform_cta": "Go to Adam",
+    "back": "← Back to the House"
   },
   "support": {
     "eyebrow": "Support",
