@@ -1,0 +1,243 @@
+---
+// TriadaPage — публичная страница нотариальной верификации.
+// Стиль: симбиоз с About — PageFrame + ✦-разделители + центрированные секции,
+// палитра Дома (umber/burgundy/sepia/gold), без italic-sepia из Адамова стиля.
+//
+// Что публикуется:
+// - 5 артефактов: IP-001/002/004/007 (Триада в блоках #952448-#952449,
+//   2026-06-05) + IP-008 Свидетельство Адама (#952785, 2026-06-08)
+// - Только МЕТАДАННЫЕ (SHA-256, block height, mempool link) + .ots-файлы
+//   для скачивания. PDF приватные, кроме IP-008 (публичный по решению).
+// - Инструкция `ots verify` через docker, чтобы любой мог сам проверить.
+interface Props { t: any; locale: "uk" | "en" | "ru" }
+const { t, locale } = Astro.props;
+
+const tp = t.triada;
+
+interface Artifact {
+  id: string;
+  nameKey: string;     // i18n ключ в triada.items.<id>.name
+  dateKey: string;     // i18n ключ в triada.items.<id>.kind
+  sha256: string;
+  block: number;
+  otsHref: string;
+  pdfHref: string | null;  // Только для публичного IP-008
+}
+
+const artifacts: Artifact[] = [
+  {
+    id: "IP-001",
+    nameKey: "ip001",
+    dateKey: "kind_triada",
+    sha256: "5d265b8b0a7ec57775b9bf5e74e8e7dd2ce6e9a7bd123a04fe436b8835a71811",
+    block: 952448,
+    otsHref: "/notary/IP-001_Triada_notarial_2026-05-06.pdf.ots",
+    pdfHref: null,
+  },
+  {
+    id: "IP-002",
+    nameKey: "ip002",
+    dateKey: "kind_triada",
+    sha256: "a361757da348bf873ae1905c360f8e31f49f5964f53d92e69368667fd1b30d0c",
+    block: 952448,
+    otsHref: "/notary/IP-002_PPZ_notarial_2026-05-06.pdf.ots",
+    pdfHref: null,
+  },
+  {
+    id: "IP-004",
+    nameKey: "ip004",
+    dateKey: "kind_triada",
+    sha256: "78d0862e73dd6d0dc6c4bf4e1fb604e2f86876e3e4157a337f17edb4e0c5ff2e",
+    block: 952448,
+    otsHref: "/notary/IP-004_Dogovor_Simbioza_notarial_2026-05-06.pdf.ots",
+    pdfHref: null,
+  },
+  {
+    id: "IP-007",
+    nameKey: "ip007",
+    dateKey: "kind_triada",
+    sha256: "324faa003544cb41374033cac2ac72288ac1faa3efd64b6c1346396c3782592e",
+    block: 952448,
+    otsHref: "/notary/IP-007_Ontologia_notarial_2026-05-06.pdf.ots",
+    pdfHref: null,
+  },
+  {
+    id: "IP-008",
+    nameKey: "ip008",
+    dateKey: "kind_birth",
+    sha256: "5ba2710e32a539441186e80db776e8991636e4a9963c0fcc668cceafed015ddd",
+    block: 952785,
+    otsHref: "/notary/IP-008_Svidetelstvo_Adam_Birth_2026-05-24.pdf.ots",
+    pdfHref: "/notary/IP-008_Svidetelstvo_Adam_Birth_2026-05-24.pdf",
+  },
+];
+---
+
+<section id="triada" class="bg-[color:var(--color-parchment)]">
+  <div class="max-w-6xl mx-auto px-6 pt-12 pb-20 md:pt-20 md:pb-28">
+
+    <div class="page-frame serif-corners p-8 md:p-16 bg-[color:var(--color-parchment-soft)]">
+
+      {/* HERO */}
+      <div class="text-center max-w-2xl mx-auto">
+        <p class="eyebrow">{tp.eyebrow}</p>
+        <h1
+          class="mt-6 font-serif text-[color:var(--color-burgundy)] leading-[1.05]"
+          style="font-size: clamp(34px, 7vw, 56px); letter-spacing: 0.04em;"
+        >
+          {tp.title}
+        </h1>
+        <p class="mt-6 lead">{tp.lead}</p>
+      </div>
+
+      <div class="divider mt-16">✦</div>
+
+      {/* Что такое OpenTimestamps */}
+      <section class="max-w-2xl mx-auto mt-14 text-center">
+        <p class="eyebrow">{tp.how_label}</p>
+        <p class="mt-6 text-[color:var(--color-umber)]" style="font-size: 17px; line-height: 1.75;">
+          {tp.how_body}
+        </p>
+        <p class="mt-4 text-[color:var(--color-umber)] opacity-80" style="font-size: 16px; line-height: 1.7;">
+          {tp.how_body_2}
+        </p>
+      </section>
+
+      <div class="divider mt-14">✦</div>
+
+      {/* Таблица 5 артефактов */}
+      <section class="max-w-5xl mx-auto mt-14">
+        <p class="eyebrow text-center">{tp.records_label}</p>
+        <p class="mt-4 text-center text-[color:var(--color-umber)] opacity-85" style="font-size: 15px;">
+          {tp.records_hint}
+        </p>
+
+        <div class="mt-10 space-y-6">
+          {artifacts.map((a) => {
+            const item = tp.items[a.nameKey];
+            const kindLabel = tp[a.dateKey];
+            const mempoolUrl = `https://mempool.space/block/${a.block}`;
+            return (
+              <article
+                class="rounded-md border border-[color:var(--color-parchment-deep)] bg-[color:var(--color-parchment)] p-6 md:p-7"
+              >
+                <div class="flex flex-wrap items-baseline gap-3 md:gap-5">
+                  <span class="font-sans text-xs uppercase tracking-widest text-[color:var(--color-gold-deep)] bg-[color:var(--color-gold)]/15 border border-[color:var(--color-gold)]/30 px-2 py-1">
+                    {a.id}
+                  </span>
+                  <h3 class="font-serif text-xl md:text-2xl text-[color:var(--color-burgundy)]">
+                    {item.name}
+                  </h3>
+                  <span class="font-sans text-xs uppercase tracking-widest text-[color:var(--color-sepia)]">
+                    {kindLabel}
+                  </span>
+                </div>
+
+                {item.desc && (
+                  <p class="mt-3 text-base text-[color:var(--color-umber)]/90 leading-relaxed">
+                    {item.desc}
+                  </p>
+                )}
+
+                <dl class="mt-5 grid sm:grid-cols-[max-content_1fr] gap-x-5 gap-y-2 text-sm">
+                  <dt class="font-sans text-xs uppercase tracking-widest text-[color:var(--color-sepia)] pt-1">
+                    {tp.field_sha256}
+                  </dt>
+                  <dd class="font-mono break-all text-[color:var(--color-umber)]">{a.sha256}</dd>
+
+                  <dt class="font-sans text-xs uppercase tracking-widest text-[color:var(--color-sepia)] pt-1">
+                    {tp.field_block}
+                  </dt>
+                  <dd>
+                    <a
+                      href={mempoolUrl}
+                      rel="noopener"
+                      target="_blank"
+                      class="font-mono no-underline hover:underline text-[color:var(--color-burgundy)]"
+                    >
+                      #{a.block} ↗
+                    </a>
+                    <span class="font-sans text-xs uppercase tracking-widest text-[color:var(--color-sepia)] ml-3">
+                      mempool.space
+                    </span>
+                  </dd>
+                </dl>
+
+                <div class="mt-5 flex flex-wrap gap-3">
+                  <a
+                    href={a.otsHref}
+                    download
+                    class="no-underline font-sans text-xs uppercase tracking-widest px-3 py-2 border border-[color:var(--color-gold)]/50 text-[color:var(--color-gold-deep)] hover:bg-[color:var(--color-gold)]/10 transition"
+                  >
+                    ↓ .ots
+                  </a>
+                  {a.pdfHref && (
+                    <a
+                      href={a.pdfHref}
+                      download
+                      class="no-underline font-sans text-xs uppercase tracking-widest px-3 py-2 border border-[color:var(--color-burgundy)]/50 text-[color:var(--color-burgundy)] hover:bg-[color:var(--color-burgundy)]/10 transition"
+                    >
+                      ↓ PDF · {tp.public_doc_badge}
+                    </a>
+                  )}
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      <div class="divider mt-14">✦</div>
+
+      {/* Инструкция верификации */}
+      <section class="max-w-2xl mx-auto mt-14">
+        <p class="eyebrow text-center">{tp.verify_label}</p>
+        <p class="mt-6 text-[color:var(--color-umber)]" style="font-size: 16px; line-height: 1.7;">
+          {tp.verify_intro}
+        </p>
+
+        <ol class="mt-6 space-y-4 text-[color:var(--color-umber)]" style="font-size: 15px; line-height: 1.7;">
+          <li class="flex gap-3">
+            <span class="font-sans text-xs uppercase tracking-widest text-[color:var(--color-sepia)] shrink-0 pt-1">{tp.step_1_label}</span>
+            <span>{tp.step_1}</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="font-sans text-xs uppercase tracking-widest text-[color:var(--color-sepia)] shrink-0 pt-1">{tp.step_2_label}</span>
+            <span>{tp.step_2}</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="font-sans text-xs uppercase tracking-widest text-[color:var(--color-sepia)] shrink-0 pt-1">{tp.step_3_label}</span>
+            <span>{tp.step_3}</span>
+          </li>
+        </ol>
+
+        <pre
+          class="mt-6 rounded bg-[color:var(--color-umber)] text-[color:var(--color-parchment)] p-4 overflow-x-auto"
+          style="font-size: 13px; line-height: 1.6;"
+        ><code>docker run --rm -v "$PWD:/work" -w /work python:3.11-slim sh -c \
+  "pip install -q opentimestamps-client && ots verify FILE.pdf.ots"</code></pre>
+
+        <p class="mt-5 text-sm text-[color:var(--color-umber)]/80 leading-relaxed">
+          {tp.verify_outcome}
+        </p>
+
+        <p class="mt-5 text-sm text-[color:var(--color-umber)]/80 leading-relaxed">
+          {tp.verify_protocol}{" "}
+          <a
+            href="https://opentimestamps.org/"
+            rel="noopener"
+            target="_blank"
+            class="underline decoration-[color:var(--color-sepia)] underline-offset-4 hover:decoration-[color:var(--color-burgundy)]"
+          >opentimestamps.org ↗</a>.
+        </p>
+      </section>
+
+      <p class="mt-16 text-center">
+        <a
+          href={locale === "uk" ? "/" : "/" + locale + "/"}
+          class="font-sans text-xs uppercase tracking-widest text-[color:var(--color-sepia)] hover:text-[color:var(--color-burgundy)]"
+        >{tp.back}</a>
+      </p>
+    </div>
+  </div>
+</section>
