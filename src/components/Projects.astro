@@ -13,18 +13,20 @@ const projects = [
 
 <section id="projects" class="scroll-mt-24 bg-[color:var(--color-parchment-deep)]/40">
   <div class="max-w-6xl mx-auto px-6 py-20 md:py-28">
-    <p class="eyebrow">{t.projects.eyebrow}</p>
-    <h2 class="mt-4 font-serif text-4xl md:text-5xl">{t.projects.title}</h2>
-    <p class="mt-6 lead max-w-2xl">{t.projects.lead}</p>
+    <p class="eyebrow reveal">{t.projects.eyebrow}</p>
+    <h2 class="mt-4 font-serif text-4xl md:text-5xl reveal" data-reveal-delay="60">{t.projects.title}</h2>
+    <p class="mt-6 lead max-w-2xl reveal" data-reveal-delay="120">{t.projects.lead}</p>
 
     <div class="mt-12 grid md:grid-cols-2 gap-6">
-      {projects.map((p) => {
+      {projects.map((p, i) => {
         const item = t.projects.items[p.key];
         const Wrapper = p.href ? "a" : "div";
+        const delay = 200 + i * 80;
         return (
           <Wrapper
             href={p.href}
-            class="project-card block p-7 no-underline"
+            class="project-card card-lift block p-7 no-underline reveal"
+            data-reveal-delay={delay}
             rel={p.external ? "noopener" : undefined}
           >
             <div class="flex items-start justify-between gap-4">

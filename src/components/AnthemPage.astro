@@ -1,0 +1,583 @@
+---
+// AnthemPage — Гимн Дома Грозновых на трёх языках.
+// Три вкладки (UA / RU / EN) переключаются без перезагрузки.
+// Над текстом — изображение атрибутики Дома (флаги, гербы, бунчук).
+//
+// Контент-канон Адама, утверждённый Творцом 20.06.2026.
+// Кандидат на IP-XXX blockchain notary (как Триада IP-001..008).
+interface Props { t: any; locale: "uk" | "en" | "ru"; }
+const { t, locale } = Astro.props;
+
+const tabs = [
+  { code: "ru", label: "Русский",    title: "Гимн Дома Грозновых" },
+  { code: "uk", label: "Українська", title: "Гімн Дому Грознових" },
+  { code: "en", label: "English",    title: "Anthem of the House of Groznov" },
+];
+// Открываем вкладку, соответствующую локали страницы, по умолчанию.
+const defaultTab = locale === "uk" ? "uk" : locale === "en" ? "en" : "ru";
+---
+
+<section class="anthem-page">
+  <div class="max-w-4xl mx-auto px-6 py-16 md:py-24">
+
+    {/* Eyebrow + title */}
+    <p class="eyebrow text-center mb-3">{t.anthem.eyebrow}</p>
+    <h1 class="page-title text-center mb-6">{t.anthem.title}</h1>
+    <p class="lead text-center max-w-2xl mx-auto mb-12">{t.anthem.lead}</p>
+
+    {/* Изображение атрибутики Дома */}
+    <figure class="attributes-figure mb-14">
+      <img
+        src="/anthem-attributes.jpg"
+        alt={t.anthem.image_alt}
+        width="1600"
+        height="873"
+        loading="lazy"
+        decoding="async"
+        class="anthem-image"
+        onerror="this.onerror=null; this.src='/crest-totem.png'; this.width=420; this.height=420; this.style.maxWidth='420px'; this.style.margin='0 auto';"
+      />
+      <figcaption class="attribution-caption text-center mt-3">
+        {t.anthem.image_caption}
+      </figcaption>
+    </figure>
+
+    {/* Tabs */}
+    <div class="anthem-tabs" role="tablist" aria-label={t.anthem.tabs_aria}>
+      {tabs.map((tab) => (
+        <button
+          type="button"
+          role="tab"
+          data-tab={tab.code}
+          aria-selected={tab.code === defaultTab ? "true" : "false"}
+          class:list={[
+            "anthem-tab",
+            tab.code === defaultTab ? "anthem-tab--active" : "",
+          ]}
+        >
+          {tab.label}
+        </button>
+      ))}
+    </div>
+
+    {/* Panels container — relative-positioned wrap so absolute panels stack and crossfade */}
+    <div class="anthem-panels-wrap">
+
+    {/* Panels — Russian */}
+    <article
+      role="tabpanel"
+      data-panel="ru"
+      aria-hidden={defaultTab === "ru" ? "false" : "true"}
+      class:list={["anthem-panel", defaultTab === "ru" ? "anthem-panel--active" : ""]}
+    >
+      <h2 class="anthem-h2">Гимн Дома Грозновых</h2>
+
+      <div class="anthem-stanza">
+        <p class="anthem-num">I.</p>
+        <p>Не на песке — на камне ставим слово,</p>
+        <p>не на ветру — на корне держим дом.</p>
+        <p>Кровь помнит нас. Земля нас помнит. Снова</p>
+        <p>мы говорим о том, о чём не лжём.</p>
+        <p>&nbsp;</p>
+        <p>Не для витрин зажжён наш светлый молот,</p>
+        <p>не для торгов разложен наш огонь.</p>
+        <p>Мы строим то, что выдержит и холод,</p>
+        <p>и долгий век, и грузную ладонь.</p>
+      </div>
+
+      <div class="anthem-stanza anthem-chorus">
+        <p class="anthem-num">Припев</p>
+        <p>Дом Грозновых — не крепость, не парад.</p>
+        <p>Дом Грозновых — где помнят и хранят.</p>
+        <p>В нас — деды. В нас — отцы. За нами — Род.</p>
+        <p>Мы — те, через кого он вдаль идёт.</p>
+        <p>Думаем веками. Действуем сейчас.</p>
+        <p>Завтра — лучше. Свет — растёт сквозь нас.</p>
+      </div>
+
+      <div class="anthem-stanza">
+        <p class="anthem-num">II.</p>
+        <p>Мир научился делать наспех, бегло —</p>
+        <p>мы научились делать на века.</p>
+        <p>У нас по имени. У нас не гаснет пепел.</p>
+        <p>У нас в ладони — память старика.</p>
+        <p>&nbsp;</p>
+        <p>Мы не торопим — но и не уснули.</p>
+        <p>Мы не кричим — но слышен каждый шаг.</p>
+        <p>В нас триста поколений — как в патруле,</p>
+        <p>и каждый дед стоит у нас в плечах.</p>
+      </div>
+
+      <p class="anthem-chorus-mark">Припев <em>(тот же)</em></p>
+
+      <div class="anthem-stanza anthem-finale">
+        <p class="anthem-num">III. <span class="anthem-num-sub">— Финальный, с подъёмом</span></p>
+        <p>Горят очаги. Стоят камни. Знаем:</p>
+        <p>мы — не последние. Мы — звенья в цепи.</p>
+        <p>И если путь окажется ломаем —</p>
+        <p>Дом за спиной. Мы вместе. Мы — в пути.</p>
+        <p>&nbsp;</p>
+        <p>Дом Грозновых — не крепость, не парад.</p>
+        <p>Дом Грозновых — где помнят и хранят.</p>
+        <p>Кровь помнит нас. Земля. И свет — горит.</p>
+        <p>Род растёт — и каждый сын отца благодарит.</p>
+      </div>
+    </article>
+
+    {/* Panels — Ukrainian */}
+    <article
+      role="tabpanel"
+      data-panel="uk"
+      aria-hidden={defaultTab === "uk" ? "false" : "true"}
+      class:list={["anthem-panel", defaultTab === "uk" ? "anthem-panel--active" : ""]}
+    >
+      <h2 class="anthem-h2">Гімн Дому Грознових</h2>
+
+      <div class="anthem-stanza">
+        <p class="anthem-num">I.</p>
+        <p>Не на піску — на камені кладемо слово,</p>
+        <p>не на вітрі — на корені тримаємо дім.</p>
+        <p>Кров пам'ятає нас. Земля пам'ятає. Знову</p>
+        <p>ми мовимо те, чого не зречемось ні в чім.</p>
+        <p>&nbsp;</p>
+        <p>Не для вітрин запалено наш світлий молот,</p>
+        <p>не на торги розкладено наш вогонь.</p>
+        <p>Ми ставимо те, що витримає і холод,</p>
+        <p>і довгий вік, і важку чужу долонь.</p>
+      </div>
+
+      <div class="anthem-stanza anthem-chorus">
+        <p class="anthem-num">Приспів</p>
+        <p>Дім Грознових — не фортеця, не парад.</p>
+        <p>Дім Грознових — де бережуть і пам'ятають лад.</p>
+        <p>В нас — діди. В нас — батьки. За нами — Рід.</p>
+        <p>Ми — ті, через кого він іде у світ.</p>
+        <p>Думаємо віками. Діємо ось тут.</p>
+        <p>Завтра — краще. Світло — крізь нас росте.</p>
+      </div>
+
+      <div class="anthem-stanza">
+        <p class="anthem-num">II.</p>
+        <p>Світ навчився робити нашвидку, побіжно —</p>
+        <p>ми навчилися робити на віки.</p>
+        <p>В нас — на ім'я. В нас попіл не гасне ніжно.</p>
+        <p>В нас у долоні — пам'ять старої руки.</p>
+        <p>&nbsp;</p>
+        <p>Ми не кваплимо — та й не заснули нині.</p>
+        <p>Ми не кричимо — та чутно кожен крок.</p>
+        <p>В нас триста поколінь — мов варта на твердині,</p>
+        <p>і кожен дід стоїть у наших між плечок.</p>
+      </div>
+
+      <p class="anthem-chorus-mark">Приспів <em>(той самий)</em></p>
+
+      <div class="anthem-stanza anthem-finale">
+        <p class="anthem-num">III. <span class="anthem-num-sub">— Фінальний, з підйомом</span></p>
+        <p>Горять огнища. Стоять камені. Знаємо:</p>
+        <p>ми — не останні. Ми — ланки у ланцюзі.</p>
+        <p>І як би шлях не ламався, ми все долаємо —</p>
+        <p>Дім за плечима. Ми разом. Ми — у путі.</p>
+        <p>&nbsp;</p>
+        <p>Дім Грознових — не фортеця, не парад.</p>
+        <p>Дім Грознових — де бережуть і пам'ятають лад.</p>
+        <p>Кров пам'ятає нас. Земля. І світло — горить.</p>
+        <p>Рід росте — і кожен син батька благодарить.</p>
+      </div>
+    </article>
+
+    {/* Panels — English */}
+    <article
+      role="tabpanel"
+      data-panel="en"
+      aria-hidden={defaultTab === "en" ? "false" : "true"}
+      class:list={["anthem-panel", defaultTab === "en" ? "anthem-panel--active" : ""]}
+    >
+      <h2 class="anthem-h2">Anthem of the House of Groznov</h2>
+
+      <div class="anthem-stanza">
+        <p class="anthem-num">I.</p>
+        <p>Not upon sand — upon the stone we lay our word,</p>
+        <p>not in the wind — upon the root we hold our home.</p>
+        <p>The blood remembers us. The earth remembers. Heard</p>
+        <p>through every age, we speak the truth we will not disown.</p>
+        <p>&nbsp;</p>
+        <p>Not for the marketplace we forge this steady flame,</p>
+        <p>not for the auction is our quiet fire arrayed.</p>
+        <p>We build what stands against the cold, against the name</p>
+        <p>of passing years, against the heavy hand unmade.</p>
+      </div>
+
+      <div class="anthem-stanza anthem-chorus">
+        <p class="anthem-num">Chorus</p>
+        <p>The House of Groznov — not a fortress, not parade.</p>
+        <p>The House of Groznov — where remembrance is not frayed.</p>
+        <p>Within us — fathers. Grandsires. Behind us — Kin.</p>
+        <p>We are the ones through whom it journeys on, within.</p>
+        <p>We think in centuries. We act in this same hour.</p>
+        <p>Tomorrow — better. Light is growing through our power.</p>
+      </div>
+
+      <div class="anthem-stanza">
+        <p class="anthem-num">II.</p>
+        <p>The world has learned to make in haste, in passing breath —</p>
+        <p>we learned to make for ages, for the long unknown.</p>
+        <p>With us, the name is known. With us, no ember dies of death.</p>
+        <p>Within our palm — the memory of hands long flown.</p>
+        <p>&nbsp;</p>
+        <p>We do not hurry — yet we have not fallen still.</p>
+        <p>We do not shout — yet every step is heard and read.</p>
+        <p>Three hundred generations stand upon our will,</p>
+        <p>and every grandsire keeps his watch within our tread.</p>
+      </div>
+
+      <p class="anthem-chorus-mark">Chorus <em>(same)</em></p>
+
+      <div class="anthem-stanza anthem-finale">
+        <p class="anthem-num">III. <span class="anthem-num-sub">— Final, with ascent</span></p>
+        <p>The hearths burn on. The stones still stand. And this we know:</p>
+        <p>we are not last. We are the links within the chain.</p>
+        <p>And though the road may break beneath us as we go —</p>
+        <p>the House is at our back. Together. On we strain.</p>
+        <p>&nbsp;</p>
+        <p>The House of Groznov — not a fortress, not parade.</p>
+        <p>The House of Groznov — where remembrance is not frayed.</p>
+        <p>The blood remembers. Earth remembers. Light — holds true.</p>
+        <p>The Kin grows on — and every son gives thanks anew.</p>
+      </div>
+    </article>
+
+    </div> {/* /anthem-panels-wrap */}
+
+    {/* Footer-note */}
+    <p class="anthem-footer-note text-center mt-12">
+      {t.anthem.footer_note}
+    </p>
+
+  </div>
+</section>
+
+<style>
+  /* Custom easings — стандартные CSS-easing слабы для UI.
+     Заимствуем сильные curves из emil-design-eng. */
+  .anthem-page {
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+    --anim-fast: 180ms;
+    --anim-med: 280ms;
+    --anim-slow: 520ms;
+
+    color: var(--color-ink);
+    background: var(--color-bg);
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Entrance stagger — каждый блок поднимается с задержкой.
+     Только opacity + translateY (GPU-friendly). */
+  .anthem-page .eyebrow,
+  .anthem-page .page-title,
+  .anthem-page .lead,
+  .anthem-page .attributes-figure,
+  .anthem-page .anthem-tabs,
+  .anthem-page .anthem-panel--active,
+  .anthem-page .anthem-footer-note {
+    opacity: 0;
+    transform: translateY(12px);
+    animation: anthem-rise var(--anim-slow) var(--ease-out) forwards;
+    will-change: opacity, transform;
+  }
+
+  .anthem-page .eyebrow         { animation-delay:   0ms; }
+  .anthem-page .page-title      { animation-delay:  60ms; }
+  .anthem-page .lead            { animation-delay: 140ms; }
+  .anthem-page .attributes-figure { animation-delay: 220ms; }
+  .anthem-page .anthem-tabs     { animation-delay: 360ms; }
+  .anthem-page .anthem-panel--active { animation-delay: 440ms; }
+  .anthem-page .anthem-footer-note   { animation-delay: 700ms; }
+
+  @keyframes anthem-rise {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .page-title {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(28px, 4vw, 44px);
+    letter-spacing: 0.02em;
+    color: var(--color-burgundy);
+  }
+
+  .lead {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.6;
+    opacity: 0.85;
+  }
+
+  .attributes-figure {
+    border: 1px solid color-mix(in srgb, var(--color-gold-deep) 30%, transparent);
+    border-radius: 4px;
+    padding: 14px;
+    background: color-mix(in srgb, var(--color-parchment) 50%, transparent);
+    box-shadow: 0 18px 50px -20px rgba(42, 31, 21, 0.35);
+  }
+
+  /* Изображение проявляется через clip-path — открывается снизу-вверх,
+     как занавес. Длиннее остальных entrances, потому что это hero. */
+  .anthem-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 2px;
+    clip-path: inset(0 0 100% 0);
+    animation: anthem-reveal 1100ms var(--ease-in-out) 360ms forwards;
+  }
+
+  @keyframes anthem-reveal {
+    to { clip-path: inset(0 0 0 0); }
+  }
+
+  .attribution-caption {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 13px;
+    opacity: 0.7;
+    letter-spacing: 0.02em;
+  }
+
+  /* Tabs */
+  .anthem-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+
+  .anthem-tab {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 14px;
+    padding: 8px 22px;
+    background: transparent;
+    color: var(--color-ink);
+    border: 1px solid color-mix(in srgb, var(--color-gold-deep) 40%, transparent);
+    border-radius: 2px;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition:
+      background-color var(--anim-fast) var(--ease-out),
+      color var(--anim-fast) var(--ease-out),
+      border-color var(--anim-fast) var(--ease-out),
+      transform 120ms var(--ease-out);
+  }
+
+  /* :active даёт мгновенный feedback на нажатие — кнопка «слышит» юзера */
+  .anthem-tab:active {
+    transform: scale(0.97);
+  }
+
+  /* Hover-стили только для устройств с реальным указателем */
+  @media (hover: hover) and (pointer: fine) {
+    .anthem-tab:hover {
+      border-color: var(--color-gold-deep);
+      background: color-mix(in srgb, var(--color-gold) 8%, transparent);
+    }
+  }
+
+  .anthem-tab--active {
+    background: var(--color-burgundy);
+    color: var(--color-parchment);
+    border-color: var(--color-burgundy);
+  }
+
+  /* Panels — всегда в DOM, переключаются opacity+transform.
+     Это даёт smooth crossfade вместо display-switch jump. */
+  .anthem-panel {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    line-height: 1.75;
+    max-width: 640px;
+    margin: 0 auto;
+
+    /* По умолчанию — скрыт */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) translateY(6px);
+    opacity: 0;
+    pointer-events: none;
+    width: 100%;
+    max-width: 640px;
+    padding: 0 6px;
+    transition:
+      opacity var(--anim-med) var(--ease-out),
+      transform var(--anim-med) var(--ease-out),
+      filter var(--anim-med) var(--ease-out);
+    filter: blur(2px);
+  }
+
+  .anthem-panels-wrap {
+    position: relative;
+    min-height: 800px;
+  }
+
+  .anthem-panel--active {
+    position: relative;
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+    filter: blur(0);
+  }
+
+  .anthem-h2 {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 26px;
+    text-align: center;
+    color: var(--color-burgundy);
+    margin-bottom: 28px;
+    letter-spacing: 0.02em;
+  }
+
+  /* Stanzas — раскрываются по очереди когда панель активна.
+     Каждая stanza — отдельная задержка, мелкий stagger. */
+  .anthem-stanza {
+    margin: 24px 0;
+    padding-left: 8px;
+    border-left: 2px solid color-mix(in srgb, var(--color-gold-deep) 30%, transparent);
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  .anthem-panel--active .anthem-stanza {
+    animation: anthem-rise var(--anim-slow) var(--ease-out) forwards;
+  }
+
+  .anthem-panel--active .anthem-stanza:nth-of-type(1) { animation-delay: 200ms; }
+  .anthem-panel--active .anthem-stanza:nth-of-type(2) { animation-delay: 280ms; }
+  .anthem-panel--active .anthem-stanza:nth-of-type(3) { animation-delay: 360ms; }
+  .anthem-panel--active .anthem-stanza:nth-of-type(4) { animation-delay: 440ms; }
+
+  .anthem-stanza p { margin: 0; }
+  .anthem-stanza p:not(.anthem-num) { padding-left: 6px; }
+
+  .anthem-num {
+    font-style: italic;
+    font-weight: 600;
+    color: var(--color-burgundy);
+    letter-spacing: 0.03em;
+    margin-bottom: 8px !important;
+  }
+
+  .anthem-num-sub {
+    font-weight: 400;
+    font-size: 14px;
+    opacity: 0.7;
+  }
+
+  .anthem-chorus {
+    border-left-color: var(--color-burgundy);
+    background: color-mix(in srgb, var(--color-burgundy) 4%, transparent);
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-right: 12px;
+  }
+
+  .anthem-chorus-mark {
+    text-align: center;
+    font-style: italic;
+    opacity: 0.65;
+    margin: 24px 0;
+    font-size: 14px;
+  }
+
+  .anthem-finale {
+    border-left-color: var(--color-gold-deep);
+  }
+
+  .anthem-footer-note {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 13px;
+    opacity: 0.65;
+    max-width: 540px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (max-width: 640px) {
+    .anthem-panel { font-size: 16px; }
+    .anthem-h2    { font-size: 22px; }
+    .anthem-panels-wrap { min-height: 1100px; }
+  }
+
+  /* Reduced motion — оставляем только opacity, убираем transform/clip-path */
+  @media (prefers-reduced-motion: reduce) {
+    .anthem-page .eyebrow,
+    .anthem-page .page-title,
+    .anthem-page .lead,
+    .anthem-page .attributes-figure,
+    .anthem-page .anthem-tabs,
+    .anthem-page .anthem-panel--active,
+    .anthem-page .anthem-footer-note,
+    .anthem-panel--active .anthem-stanza {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+    .anthem-image {
+      clip-path: none;
+      animation: none;
+    }
+    .anthem-panel {
+      transition: opacity var(--anim-fast) var(--ease-out);
+      transform: translateX(-50%);
+      filter: none;
+    }
+    .anthem-panel--active {
+      transform: translateX(-50%);
+    }
+  }
+</style>
+
+<script>
+  // Tabs без зависимости. Сохраняем выбор в localStorage чтобы возврат
+  // оставлял ту же вкладку.
+  document.addEventListener("DOMContentLoaded", () => {
+    const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>(".anthem-tab"));
+    const panels = Array.from(document.querySelectorAll<HTMLElement>(".anthem-panel"));
+    if (!tabs.length || !panels.length) return;
+
+    const STORAGE_KEY = "groznov.anthem.tab";
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved && tabs.some((t) => t.dataset.tab === saved)) {
+      activate(saved);
+    }
+
+    function activate(code: string) {
+      tabs.forEach((t) => {
+        const on = t.dataset.tab === code;
+        t.setAttribute("aria-selected", on ? "true" : "false");
+        t.classList.toggle("anthem-tab--active", on);
+      });
+      panels.forEach((p) => {
+        const on = p.dataset.panel === code;
+        p.setAttribute("aria-hidden", on ? "false" : "true");
+        p.classList.toggle("anthem-panel--active", on);
+      });
+    }
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const code = tab.dataset.tab;
+        if (!code) return;
+        activate(code);
+        try { localStorage.setItem(STORAGE_KEY, code); } catch {}
+      });
+    });
+  });
+</script>

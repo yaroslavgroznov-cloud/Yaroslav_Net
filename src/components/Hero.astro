@@ -11,13 +11,13 @@ const prefix = locale === "uk" ? "" : `/${locale}`;
 
 <section class="relative overflow-hidden">
   <div class="max-w-6xl mx-auto px-6 pt-20 pb-24 md:pt-32 md:pb-32">
-    <div class="page-frame serif-corners p-8 md:p-16 bg-[color:var(--color-parchment-soft)]">
-      <p class="eyebrow text-center">{t.hero.eyebrow}</p>
+    <div class="page-frame serif-corners p-8 md:p-16 bg-[color:var(--color-parchment-soft)] stagger-parent">
+      <p class="eyebrow text-center stagger-1">{t.hero.eyebrow}</p>
 
-      <div class="mt-6 flex justify-center">
+      <div class="mt-6 flex justify-center stagger-2">
         <a
           href={`${prefix}/about`}
-          class="inline-block transition-transform hover:scale-[1.03]"
+          class="inline-block hero-crest-link"
           aria-label={t.hero.crest_link_label}
         >
           <img
@@ -25,28 +25,28 @@ const prefix = locale === "uk" ? "" : `/${locale}`;
             alt={locale === "en" ? "Coat of arms of the House of Groznov" : "Герб Дома Грозновых"}
             width="220"
             height="180"
-            class="object-contain"
+            class="object-contain hero-crest"
             loading="eager"
           />
         </a>
       </div>
 
-      <h1 class="mt-8 text-center font-serif text-5xl md:text-7xl text-[color:var(--color-burgundy)] leading-[1.05]">
+      <h1 class="mt-8 text-center font-serif text-5xl md:text-7xl text-[color:var(--color-burgundy)] leading-[1.05] stagger-3">
         {t.hero.title}
       </h1>
 
-      <p class="mt-8 lead text-center max-w-2xl mx-auto">{t.hero.lead}</p>
+      <p class="mt-8 lead text-center max-w-2xl mx-auto stagger-4">{t.hero.lead}</p>
 
-      <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center font-sans text-sm">
+      <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center font-sans text-sm stagger-5">
         <a
           href="https://adam.groznov.uk/"
-          class="no-underline inline-block px-6 py-3 bg-[color:var(--color-burgundy)] text-[color:var(--color-parchment-soft)] hover:bg-[color:var(--color-burgundy-light)] transition tracking-wide uppercase"
+          class="cta-button no-underline inline-block px-6 py-3 bg-[color:var(--color-burgundy)] text-[color:var(--color-parchment-soft)] tracking-wide uppercase"
         >
           {t.hero.cta_primary} →
         </a>
         <a
           href={`${prefix}/oracle`}
-          class="no-underline inline-block px-6 py-3 border border-[color:var(--color-gold)] text-[color:var(--color-gold-deep)] hover:bg-[color:var(--color-parchment-deep)] transition tracking-wide uppercase"
+          class="cta-button cta-button--ghost no-underline inline-block px-6 py-3 border border-[color:var(--color-gold)] text-[color:var(--color-gold-deep)] tracking-wide uppercase"
         >
           {t.hero.cta_secondary} →
         </a>
@@ -54,3 +54,48 @@ const prefix = locale === "uk" ? "" : `/${locale}`;
     </div>
   </div>
 </section>
+
+<style>
+  /* Hero CTAs — sustained hover transition + tap feedback */
+  .cta-button {
+    transition:
+      background-color var(--dur-med) var(--ease-out),
+      color var(--dur-med) var(--ease-out),
+      transform var(--dur-tap) var(--ease-out);
+  }
+
+  .cta-button:active { transform: scale(0.97); }
+
+  @media (hover: hover) and (pointer: fine) {
+    .cta-button:hover {
+      background-color: var(--color-burgundy-light);
+    }
+    .cta-button--ghost:hover {
+      background-color: var(--color-parchment-deep);
+    }
+  }
+
+  /* Герб — subtle breathing scale на hover */
+  .hero-crest-link {
+    display: inline-block;
+    transition: transform var(--dur-med) var(--ease-out);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .hero-crest-link:hover {
+      transform: scale(1.03);
+    }
+  }
+
+  .hero-crest-link:active {
+    transform: scale(0.985);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cta-button:active,
+    .hero-crest-link:hover,
+    .hero-crest-link:active {
+      transform: none;
+    }
+  }
+</style>

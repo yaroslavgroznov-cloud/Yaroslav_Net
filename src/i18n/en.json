@@ -8,6 +8,7 @@
     "manifest": "Manifest",
     "heritage": "Heritage",
     "projects": "Projects",
+    "anthem": "Anthem",
     "tur": "Aurochs",
     "contact": "Contact"
   },
@@ -184,5 +185,14 @@
     "status_p1": "Oracle v2.6 is in operation — internal core on our own servers. Public digest channel is being prepared.",
     "status_p2": "For press and research collaborations — write to us directly.",
     "back": "← Back to the House"
+  },
+  "anthem": {
+    "eyebrow": "Anthem of the House",
+    "title": "Anthem of the House of Groznov",
+    "lead": "Words the House speaks of itself. Three voices, three languages — one heart. Ukrainian, Russian, English — full canon, not translation.",
+    "image_alt": "Attributes of the House of Groznov: banners, coat of arms, bunchuk, horn, coins",
+    "image_caption": "Attributes of the House · Banners, crest, bunchuk, horn — «The blood remembers»",
+    "tabs_aria": "Anthem languages",
+    "footer_note": "The text is canon of the House of Groznov. The blood remembers. The earth remembers."
   }
 }

@@ -34,11 +34,12 @@ const prefix = locale === "uk" ? "" : `/${locale}`;
     </a>
 
     <nav class="hidden md:flex items-center gap-7 font-sans text-sm">
-      <a class="no-underline hover:underline" href={`${prefix}/#manifest`}>{t.nav.manifest}</a>
-      <a class="no-underline hover:underline" href={`${prefix}/#heritage`}>{t.nav.heritage}</a>
-      <a class="no-underline hover:underline" href={`${prefix}/#projects`}>{t.nav.projects}</a>
-      <a class="no-underline hover:underline" href={`${prefix}/#tur`}>{t.nav.tur}</a>
-      <a class="no-underline hover:underline" href={`${prefix}/#contact`}>{t.nav.contact}</a>
+      <a class="house-link no-underline" href={`${prefix}/#manifest`}>{t.nav.manifest}</a>
+      <a class="house-link no-underline" href={`${prefix}/#heritage`}>{t.nav.heritage}</a>
+      <a class="house-link no-underline" href={`${prefix}/#projects`}>{t.nav.projects}</a>
+      <a class="house-link no-underline" href={`${prefix}/#tur`}>{t.nav.tur}</a>
+      <a class="house-link no-underline" href={`${prefix}/anthem`}>{t.nav.anthem}</a>
+      <a class="house-link no-underline" href={`${prefix}/#contact`}>{t.nav.contact}</a>
     </nav>
 
     <div class="flex items-center gap-3 sm:gap-4">

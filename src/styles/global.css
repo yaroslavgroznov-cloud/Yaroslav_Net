@@ -184,3 +184,166 @@ a:hover {
 :root[data-theme="dark"] .project-card:hover {
   box-shadow: 0 8px 24px -12px rgba(201, 162, 39, 0.20);
 }
+
+/* ─────────────────────────────────────────────────────────────────────
+   Дом Грозновых · Motion Design System v1 (20.06.2026)
+   Skill: emil-design-eng (Emil Kowalski). Стандартные CSS easings слабы;
+   используем сильные curves. Длительность UI ≤ 300ms. Только transform
+   + opacity (GPU-friendly). prefers-reduced-motion уважается.
+   ───────────────────────────────────────────────────────────────────── */
+:root {
+  /* Easing curves */
+  --ease-out:      cubic-bezier(0.23, 1, 0.32, 1);     /* strong ease-out */
+  --ease-in-out:   cubic-bezier(0.77, 0, 0.175, 1);    /* strong ease-in-out */
+  --ease-drawer:   cubic-bezier(0.32, 0.72, 0, 1);     /* iOS-like */
+  --ease-emil:     cubic-bezier(0.16, 1, 0.3, 1);      /* очень мягкий settle */
+
+  /* Durations */
+  --dur-tap:    140ms;  /* button :active */
+  --dur-fast:   180ms;  /* tooltips, small UI */
+  --dur-med:    280ms;  /* dropdowns, hover */
+  --dur-slow:   520ms;  /* hero entrance */
+  --dur-reveal: 900ms;  /* scroll reveal */
+}
+
+/* Утилиты scroll-reveal — добавляются JS'ом класс .is-visible
+   когда элемент попадает в viewport. До этого — скрыт. */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity var(--dur-reveal) var(--ease-out),
+    transform var(--dur-reveal) var(--ease-out);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Варианты — направление и stagger через data-reveal-delay */
+.reveal--left  { transform: translateX(-24px); }
+.reveal--left.is-visible  { transform: translateX(0); }
+
+.reveal--right { transform: translateX(24px); }
+.reveal--right.is-visible { transform: translateX(0); }
+
+.reveal--scale { transform: scale(0.96); }
+.reveal--scale.is-visible { transform: scale(1); }
+
+.reveal[data-reveal-delay="60"]  { transition-delay:  60ms; }
+.reveal[data-reveal-delay="120"] { transition-delay: 120ms; }
+.reveal[data-reveal-delay="180"] { transition-delay: 180ms; }
+.reveal[data-reveal-delay="240"] { transition-delay: 240ms; }
+.reveal[data-reveal-delay="300"] { transition-delay: 300ms; }
+.reveal[data-reveal-delay="400"] { transition-delay: 400ms; }
+.reveal[data-reveal-delay="500"] { transition-delay: 500ms; }
+
+/* :active feedback на любую кликабельную кнопку/линк (House style).
+   Subtle — 0.97 не больно, не дёргает. */
+.btn,
+.cta-button,
+button.house-btn,
+a.house-link-cta {
+  transition: transform var(--dur-tap) var(--ease-out);
+}
+
+.btn:active,
+.cta-button:active,
+button.house-btn:active,
+a.house-link-cta:active {
+  transform: scale(0.97);
+}
+
+/* Hover lift — только для устройств с реальным указателем.
+   Применяй классом .card-lift к карточкам и тайлам. */
+.card-lift {
+  transition:
+    transform var(--dur-med) var(--ease-out),
+    box-shadow var(--dur-med) var(--ease-out),
+    border-color var(--dur-med) var(--ease-out);
+  will-change: transform;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card-lift:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 40px -22px rgba(42, 31, 21, 0.35);
+  }
+}
+
+/* Аристократичный underline для inline ссылок Дома.
+   Растёт слева направо, не дёргает текст. */
+.house-link {
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+  background-image: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--color-gold-deep) 70%, transparent),
+    color-mix(in srgb, var(--color-gold-deep) 70%, transparent)
+  );
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0 1px;
+  transition: background-size var(--dur-med) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .house-link:hover {
+    background-size: 100% 1px;
+  }
+}
+
+/* Hero stagger — для index/about/etc. Использовать в комбинации
+   с классами .stagger-1 / .stagger-2 / .stagger-3 на дочерних элементах. */
+.stagger-parent .stagger-1,
+.stagger-parent .stagger-2,
+.stagger-parent .stagger-3,
+.stagger-parent .stagger-4,
+.stagger-parent .stagger-5 {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: stagger-rise var(--dur-slow) var(--ease-out) forwards;
+  will-change: opacity, transform;
+}
+
+.stagger-parent .stagger-1 { animation-delay:   0ms; }
+.stagger-parent .stagger-2 { animation-delay:  90ms; }
+.stagger-parent .stagger-3 { animation-delay: 180ms; }
+.stagger-parent .stagger-4 { animation-delay: 280ms; }
+.stagger-parent .stagger-5 { animation-delay: 380ms; }
+
+@keyframes stagger-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Reduced-motion respect — отключаем motion, оставляем opacity */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .stagger-parent .stagger-1,
+  .stagger-parent .stagger-2,
+  .stagger-parent .stagger-3,
+  .stagger-parent .stagger-4,
+  .stagger-parent .stagger-5 {
+    transform: none !important;
+    animation: none !important;
+    transition: opacity var(--dur-fast) var(--ease-out) !important;
+    opacity: 1 !important;
+  }
+
+  .card-lift:hover {
+    transform: none;
+  }
+
+  .btn:active,
+  .cta-button:active,
+  button.house-btn:active,
+  a.house-link-cta:active {
+    transform: none;
+  }
+}

@@ -5,15 +5,15 @@ const { t } = Astro.props;
 
 <section id="heritage" class="scroll-mt-24 bg-[color:var(--color-parchment-soft)]">
   <div class="max-w-3xl mx-auto px-6 py-20 md:py-28">
-    <p class="eyebrow">{t.heritage.eyebrow}</p>
-    <h2 class="mt-4 font-serif text-4xl md:text-5xl">{t.heritage.title}</h2>
+    <p class="eyebrow reveal">{t.heritage.eyebrow}</p>
+    <h2 class="mt-4 font-serif text-4xl md:text-5xl reveal" data-reveal-delay="60">{t.heritage.title}</h2>
 
     <div class="mt-10 space-y-7 text-lg md:text-xl leading-relaxed text-[color:var(--color-umber)]">
-      <p class="lead">{t.heritage.p1}</p>
-      <p>{t.heritage.p2}</p>
-      <p>{t.heritage.p3}</p>
+      <p class="lead reveal" data-reveal-delay="120">{t.heritage.p1}</p>
+      <p class="reveal" data-reveal-delay="180">{t.heritage.p2}</p>
+      <p class="reveal" data-reveal-delay="240">{t.heritage.p3}</p>
     </div>
 
-    <div class="divider mt-14">✦</div>
+    <div class="divider mt-14 reveal" data-reveal-delay="320">✦</div>
   </div>
 </section>

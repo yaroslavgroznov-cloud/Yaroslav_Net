@@ -5,23 +5,41 @@ const { t } = Astro.props;
 
 <section id="tur" class="scroll-mt-24">
   <div class="max-w-5xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-[1fr_2fr] gap-12 items-center">
-    <div class="flex justify-center md:justify-start">
+    <div class="flex justify-center md:justify-start reveal reveal--left">
       <img
         src="/crest-totem.png"
         alt="Герб Дома Грозновых · Aurochs of the House"
         width="420"
         height="420"
-        class="rounded-sm shadow-[0_12px_40px_-12px_rgba(42,31,21,0.45)] ring-1 ring-[color:var(--color-gold)]/25"
+        class="rounded-sm shadow-[0_12px_40px_-12px_rgba(42,31,21,0.45)] ring-1 ring-[color:var(--color-gold)]/25 tur-image"
         loading="lazy"
       />
     </div>
 
     <div>
-      <p class="eyebrow">{t.tur.eyebrow}</p>
-      <h2 class="mt-4 font-serif text-4xl md:text-5xl">{t.tur.title}</h2>
-      <p class="mt-6 lead">{t.tur.lead}</p>
-      <p class="mt-6 text-lg leading-relaxed">{t.tur.p1}</p>
-      <p class="mt-4 text-lg leading-relaxed">{t.tur.p2}</p>
+      <p class="eyebrow reveal" data-reveal-delay="120">{t.tur.eyebrow}</p>
+      <h2 class="mt-4 font-serif text-4xl md:text-5xl reveal" data-reveal-delay="180">{t.tur.title}</h2>
+      <p class="mt-6 lead reveal" data-reveal-delay="240">{t.tur.lead}</p>
+      <p class="mt-6 text-lg leading-relaxed reveal" data-reveal-delay="300">{t.tur.p1}</p>
+      <p class="mt-4 text-lg leading-relaxed reveal" data-reveal-delay="360">{t.tur.p2}</p>
     </div>
   </div>
 </section>
+
+<style>
+  /* Лёгкое breathing на туре — едва заметно, чтобы не отвлекать,
+     но герб не выглядел «прибитым». 8s, очень медленно. */
+  .tur-image {
+    animation: tur-breathe 8s var(--ease-in-out) infinite;
+    transform-origin: center;
+  }
+
+  @keyframes tur-breathe {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.012); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tur-image { animation: none; }
+  }
+</style>
