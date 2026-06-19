@@ -75,15 +75,38 @@ const prefix = locale === "uk" ? "" : `/${locale}`;
     }
   }
 
-  /* Герб — subtle breathing scale на hover */
+  /* Герб — живая графика.
+     Idle: едва заметное breathing (8s, как тур-герб). Подсветка золотом
+     постоянная, но мягкая (drop-shadow 12px gold @ 0.18).
+     Hover: scale 1.06 + усиление glow + brightness +5% + контр-rotation 0.6°.
+     Active: tap-feedback scale 0.97. */
   .hero-crest-link {
     display: inline-block;
-    transition: transform var(--dur-med) var(--ease-out);
+    border-radius: 4px;
+    transition:
+      transform var(--dur-med) var(--ease-emil),
+      filter   var(--dur-med) var(--ease-out);
+    will-change: transform, filter;
+    filter: drop-shadow(0 6px 18px rgba(201, 162, 39, 0.18));
+  }
+
+  .hero-crest {
+    animation: hero-crest-breathe 8s var(--ease-in-out) infinite;
+    transform-origin: center;
+  }
+
+  @keyframes hero-crest-breathe {
+    0%, 100% { transform: scale(1)     rotate(0deg); }
+    50%      { transform: scale(1.018) rotate(-0.4deg); }
   }
 
   @media (hover: hover) and (pointer: fine) {
     .hero-crest-link:hover {
-      transform: scale(1.03);
+      transform: scale(1.06) rotate(0.6deg);
+      filter:
+        drop-shadow(0 10px 28px rgba(201, 162, 39, 0.42))
+        drop-shadow(0 0 14px rgba(201, 162, 39, 0.18))
+        brightness(1.05);
     }
   }
 
@@ -97,5 +120,6 @@ const prefix = locale === "uk" ? "" : `/${locale}`;
     .hero-crest-link:active {
       transform: none;
     }
+    .hero-crest { animation: none; }
   }
 </style>

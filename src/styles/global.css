@@ -322,9 +322,77 @@ a.house-link-cta:active {
   }
 }
 
+/* LIVE-бейдж — медленное мерцание золотом. Не дёргает, но даёт ощущение
+   «горит, проект живой». 2.4s — медленнее сердцебиения, не назойливо. */
+.live-pulse {
+  animation: live-pulse 2.4s var(--ease-in-out) infinite;
+}
+
+@keyframes live-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(201, 162, 39, 0.0);
+    border-color: color-mix(in srgb, var(--color-gold) 30%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(201, 162, 39, 0.10);
+    border-color: color-mix(in srgb, var(--color-gold) 60%, transparent);
+  }
+}
+
+/* Декоративный divider — линии «прорастают» от центра наружу при reveal.
+   Применять к .divider, обёрнутому в .reveal. */
+.reveal .divider::before,
+.reveal .divider::after {
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform var(--dur-slow) var(--ease-emil);
+}
+.reveal.is-visible .divider::before,
+.reveal.is-visible .divider::after {
+  transform: scaleX(1);
+}
+
+/* Plate-glow — общий помощник для логотипов/гербов. Применяй классом
+   .crest-glow к <img>, hover родительского контейнера усилит свечение. */
+.crest-glow {
+  transition:
+    transform var(--dur-med) var(--ease-emil),
+    filter    var(--dur-med) var(--ease-out);
+  will-change: transform, filter;
+  filter: drop-shadow(0 4px 12px rgba(201, 162, 39, 0.14));
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .crest-glow-host:hover .crest-glow {
+    transform: scale(1.04);
+    filter:
+      drop-shadow(0 8px 22px rgba(201, 162, 39, 0.35))
+      drop-shadow(0 0 10px rgba(201, 162, 39, 0.20))
+      brightness(1.05);
+  }
+}
+
+/* SECTION transition — мягкий переход между блоками: каждая <section>,
+   получив .section-fade, появляется лёгкой вуалью при скролле в неё.
+   Использует тот же IntersectionObserver, что .reveal — рамка-флаг
+   .is-visible общая. Это даёт «дыхание» странице, не нарушая макет. */
+.section-fade {
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity var(--dur-reveal) var(--ease-out),
+    transform var(--dur-reveal) var(--ease-out);
+  will-change: opacity, transform;
+}
+.section-fade.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* Reduced-motion respect — отключаем motion, оставляем opacity */
 @media (prefers-reduced-motion: reduce) {
   .reveal,
+  .section-fade,
   .stagger-parent .stagger-1,
   .stagger-parent .stagger-2,
   .stagger-parent .stagger-3,
@@ -336,8 +404,18 @@ a.house-link-cta:active {
     opacity: 1 !important;
   }
 
-  .card-lift:hover {
+  .card-lift:hover,
+  .crest-glow-host:hover .crest-glow {
     transform: none;
+  }
+
+  .live-pulse {
+    animation: none;
+  }
+
+  .reveal .divider::before,
+  .reveal .divider::after {
+    transform: scaleX(1);
   }
 
   .btn:active,

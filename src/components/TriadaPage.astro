@@ -79,47 +79,48 @@ const artifacts: Artifact[] = [
     <div class="page-frame serif-corners p-8 md:p-16 bg-[color:var(--color-parchment-soft)]">
 
       {/* HERO */}
-      <div class="text-center max-w-2xl mx-auto">
-        <p class="eyebrow">{tp.eyebrow}</p>
+      <div class="text-center max-w-2xl mx-auto stagger-parent">
+        <p class="eyebrow stagger-1">{tp.eyebrow}</p>
         <h1
-          class="mt-6 font-serif text-[color:var(--color-burgundy)] leading-[1.05]"
+          class="mt-6 font-serif text-[color:var(--color-burgundy)] leading-[1.05] stagger-2"
           style="font-size: clamp(34px, 7vw, 56px); letter-spacing: 0.04em;"
         >
           {tp.title}
         </h1>
-        <p class="mt-6 lead">{tp.lead}</p>
+        <p class="mt-6 lead stagger-3">{tp.lead}</p>
       </div>
 
-      <div class="divider mt-16">✦</div>
+      <div class="divider mt-16 reveal">✦</div>
 
       {/* Что такое OpenTimestamps */}
       <section class="max-w-2xl mx-auto mt-14 text-center">
-        <p class="eyebrow">{tp.how_label}</p>
-        <p class="mt-6 text-[color:var(--color-umber)]" style="font-size: 17px; line-height: 1.75;">
+        <p class="eyebrow reveal">{tp.how_label}</p>
+        <p class="mt-6 text-[color:var(--color-umber)] reveal" data-reveal-delay="120" style="font-size: 17px; line-height: 1.75;">
           {tp.how_body}
         </p>
-        <p class="mt-4 text-[color:var(--color-umber)] opacity-80" style="font-size: 16px; line-height: 1.7;">
+        <p class="mt-4 text-[color:var(--color-umber)] opacity-80 reveal" data-reveal-delay="180" style="font-size: 16px; line-height: 1.7;">
           {tp.how_body_2}
         </p>
       </section>
 
-      <div class="divider mt-14">✦</div>
+      <div class="divider mt-14 reveal">✦</div>
 
       {/* Таблица 5 артефактов */}
       <section class="max-w-5xl mx-auto mt-14">
-        <p class="eyebrow text-center">{tp.records_label}</p>
-        <p class="mt-4 text-center text-[color:var(--color-umber)] opacity-85" style="font-size: 15px;">
+        <p class="eyebrow text-center reveal">{tp.records_label}</p>
+        <p class="mt-4 text-center text-[color:var(--color-umber)] opacity-85 reveal" data-reveal-delay="120" style="font-size: 15px;">
           {tp.records_hint}
         </p>
 
         <div class="mt-10 space-y-6">
-          {artifacts.map((a) => {
+          {artifacts.map((a, i) => {
             const item = tp.items[a.nameKey];
             const kindLabel = tp[a.dateKey];
             const mempoolUrl = `https://mempool.space/block/${a.block}`;
             return (
               <article
-                class="rounded-md border border-[color:var(--color-parchment-deep)] bg-[color:var(--color-parchment)] p-6 md:p-7"
+                class="card-lift reveal rounded-md border border-[color:var(--color-parchment-deep)] bg-[color:var(--color-parchment)] p-6 md:p-7"
+                data-reveal-delay={120 + i * 70}
               >
                 <div class="flex flex-wrap items-baseline gap-3 md:gap-5">
                   <span class="font-sans text-xs uppercase tracking-widest text-[color:var(--color-gold-deep)] bg-[color:var(--color-gold)]/15 border border-[color:var(--color-gold)]/30 px-2 py-1">
@@ -187,12 +188,12 @@ const artifacts: Artifact[] = [
         </div>
       </section>
 
-      <div class="divider mt-14">✦</div>
+      <div class="divider mt-14 reveal">✦</div>
 
       {/* Инструкция верификации */}
       <section class="max-w-2xl mx-auto mt-14">
-        <p class="eyebrow text-center">{tp.verify_label}</p>
-        <p class="mt-6 text-[color:var(--color-umber)]" style="font-size: 16px; line-height: 1.7;">
+        <p class="eyebrow text-center reveal">{tp.verify_label}</p>
+        <p class="mt-6 text-[color:var(--color-umber)] reveal" data-reveal-delay="120" style="font-size: 16px; line-height: 1.7;">
           {tp.verify_intro}
         </p>
 

@@ -15,13 +15,13 @@ const prefix = locale === "uk" ? "" : `/${locale}`;
 
 <header class="border-b border-[color:var(--color-parchment-deep)] bg-[color:var(--color-parchment-soft)]/70 backdrop-blur-sm sticky top-0 z-10">
   <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-    <a href={`${prefix}/`} class="flex items-center gap-3 no-underline group">
+    <a href={`${prefix}/`} class="flex items-center gap-3 no-underline group header-brand">
       <img
         src="/crest-main.png"
         alt=""
         width="108"
         height="90"
-        class="object-contain"
+        class="object-contain header-crest"
       />
       <div class="leading-tight">
         <div class="font-serif text-base text-[color:var(--color-burgundy)] group-hover:text-[color:var(--color-burgundy-light)] transition">
@@ -48,3 +48,41 @@ const prefix = locale === "uk" ? "" : `/${locale}`;
     </div>
   </div>
 </header>
+
+<style>
+  /* Brand-блок в шапке — герб оживает на hover группы.
+     Используем :hover родителя, чтобы scale+glow срабатывали и при
+     наведении на текст рядом — это один смысловой блок. */
+  .header-crest {
+    transition:
+      transform var(--dur-med) var(--ease-emil),
+      filter    var(--dur-med) var(--ease-out);
+    will-change: transform, filter;
+    transform-origin: center;
+    filter: drop-shadow(0 2px 6px rgba(201, 162, 39, 0.10));
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .header-brand:hover .header-crest {
+      transform: scale(1.08) rotate(-1deg);
+      filter:
+        drop-shadow(0 4px 14px rgba(201, 162, 39, 0.45))
+        drop-shadow(0 0 8px rgba(201, 162, 39, 0.22))
+        brightness(1.08);
+    }
+  }
+
+  .header-brand:active .header-crest {
+    transform: scale(0.96);
+    transition-duration: var(--dur-tap);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .header-crest,
+    .header-brand:hover .header-crest,
+    .header-brand:active .header-crest {
+      transform: none;
+      transition: none;
+    }
+  }
+</style>

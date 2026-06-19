@@ -15,16 +15,16 @@ const items = [
 
 <section id="contact" class="scroll-mt-24 bg-[color:var(--color-parchment-soft)]">
   <div class="max-w-4xl mx-auto px-6 py-20 md:py-28">
-    <p class="eyebrow">{t.contact.eyebrow}</p>
-    <h2 class="mt-4 font-serif text-4xl md:text-5xl">{t.contact.title}</h2>
+    <p class="eyebrow reveal">{t.contact.eyebrow}</p>
+    <h2 class="mt-4 font-serif text-4xl md:text-5xl reveal" data-reveal-delay="60">{t.contact.title}</h2>
 
     <ul class="mt-10 space-y-5">
-      {items.map((it) => (
-        <li class="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 border-b border-[color:var(--color-parchment-deep)] pb-5">
+      {items.map((it, i) => (
+        <li class="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 border-b border-[color:var(--color-parchment-deep)] pb-5 reveal reveal--left" data-reveal-delay={120 + i * 80}>
           <span class="font-sans text-xs uppercase tracking-widest text-[color:var(--color-sepia)] min-w-[12rem]">
             {it.label}
           </span>
-          <a href={it.href} class="font-serif text-xl no-underline hover:underline">
+          <a href={it.href} class="house-link font-serif text-xl no-underline">
             {it.value}
           </a>
         </li>

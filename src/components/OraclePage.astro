@@ -17,15 +17,15 @@ const p = t.oracle_page;
         {p.back}
       </a>
 
-      <p class="eyebrow mt-10">{p.kicker}</p>
+      <p class="eyebrow mt-10 reveal">{p.kicker}</p>
 
-      <h1 class="mt-4 font-serif text-4xl md:text-6xl text-[color:var(--color-burgundy)] leading-[1.05] uppercase">
+      <h1 class="mt-4 font-serif text-4xl md:text-6xl text-[color:var(--color-burgundy)] leading-[1.05] uppercase reveal" data-reveal-delay="60">
         {p.title}
       </h1>
 
-      <p class="mt-8 lead max-w-3xl">{p.sub}</p>
+      <p class="mt-8 lead max-w-3xl reveal" data-reveal-delay="180">{p.sub}</p>
 
-      <blockquote class="mt-10 border-l-4 border-[color:var(--color-burgundy)]/60 pl-6 italic font-serif text-xl md:text-2xl text-[color:var(--color-sepia)] max-w-3xl">
+      <blockquote class="mt-10 border-l-4 border-[color:var(--color-burgundy)]/60 pl-6 italic font-serif text-xl md:text-2xl text-[color:var(--color-sepia)] max-w-3xl reveal" data-reveal-delay="240">
         «{p.motto}»
       </blockquote>
     </div>
@@ -34,12 +34,12 @@ const p = t.oracle_page;
   <!-- 5 directions -->
   <section class="bg-[color:var(--color-parchment-deep)]/40 border-y border-[color:var(--color-parchment-deep)]">
     <div class="max-w-5xl mx-auto px-6 py-16 md:py-24">
-      <p class="eyebrow">{p.services_eyebrow}</p>
-      <h2 class="mt-4 font-serif text-3xl md:text-5xl">{p.services_title}</h2>
+      <p class="eyebrow reveal">{p.services_eyebrow}</p>
+      <h2 class="mt-4 font-serif text-3xl md:text-5xl reveal" data-reveal-delay="60">{p.services_title}</h2>
 
       <div class="mt-12 divide-y divide-[color:var(--color-parchment-deep)]">
-        {p.services.map((s: any) => (
-          <article class="grid grid-cols-[auto_1fr] gap-6 md:gap-10 py-7">
+        {p.services.map((s: any, i: number) => (
+          <article class="grid grid-cols-[auto_1fr] gap-6 md:gap-10 py-7 reveal reveal--left" data-reveal-delay={120 + i * 80}>
             <span class="font-serif text-3xl md:text-4xl text-[color:var(--color-gold-deep)] tabular-nums">
               {s.num}
             </span>
@@ -60,11 +60,11 @@ const p = t.oracle_page;
   <!-- Status -->
   <section class="bg-[color:var(--color-parchment-soft)]">
     <div class="max-w-3xl mx-auto px-6 py-16 md:py-24">
-      <p class="eyebrow">{p.status_eyebrow}</p>
-      <h2 class="mt-4 font-serif text-3xl md:text-4xl">{p.status_title}</h2>
+      <p class="eyebrow reveal">{p.status_eyebrow}</p>
+      <h2 class="mt-4 font-serif text-3xl md:text-4xl reveal" data-reveal-delay="60">{p.status_title}</h2>
 
-      <p class="mt-6 text-lg leading-relaxed">{p.status_p1}</p>
-      <p class="mt-4 text-lg leading-relaxed">{p.status_p2}</p>
+      <p class="mt-6 text-lg leading-relaxed reveal" data-reveal-delay="120">{p.status_p1}</p>
+      <p class="mt-4 text-lg leading-relaxed reveal" data-reveal-delay="180">{p.status_p2}</p>
 
       <ul class="mt-10 space-y-3 font-sans text-sm">
         <li>

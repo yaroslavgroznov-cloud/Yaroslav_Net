@@ -22,23 +22,24 @@ const sup = t.support;
 
 <section id="support" class="scroll-mt-24 bg-[color:var(--color-parchment)]">
   <div class="max-w-3xl mx-auto px-6 py-20 md:py-28">
-    <p class="eyebrow">{sup.eyebrow}</p>
-    <h1 class="mt-4 font-serif text-4xl md:text-5xl">{sup.title}</h1>
+    <p class="eyebrow reveal">{sup.eyebrow}</p>
+    <h1 class="mt-4 font-serif text-4xl md:text-5xl reveal" data-reveal-delay="60">{sup.title}</h1>
 
     <div class="mt-10 space-y-7 text-lg md:text-xl leading-relaxed text-[color:var(--color-umber)]">
-      <p class="lead">{sup.lead}</p>
-      <p>{sup.p1}</p>
-      <p>{sup.p2}</p>
+      <p class="lead reveal" data-reveal-delay="120">{sup.lead}</p>
+      <p class="reveal" data-reveal-delay="180">{sup.p1}</p>
+      <p class="reveal" data-reveal-delay="240">{sup.p2}</p>
     </div>
 
-    <h2 class="mt-16 font-serif text-2xl md:text-3xl">{sup.how_title}</h2>
-    <p class="mt-4 text-base md:text-lg leading-relaxed text-[color:var(--color-umber)]">
+    <h2 class="mt-16 font-serif text-2xl md:text-3xl reveal">{sup.how_title}</h2>
+    <p class="mt-4 text-base md:text-lg leading-relaxed text-[color:var(--color-umber)] reveal" data-reveal-delay="120">
       {sup.how_lead}
     </p>
 
     {/* Реквизиты — карточка с QR и адресом. Один кошелёк USDT TRC20. */}
     <div
-      class="mt-10 rounded-md border border-[color:var(--color-parchment-deep)] bg-[color:var(--color-parchment-soft)] p-6 md:p-10"
+      class="mt-10 rounded-md border border-[color:var(--color-parchment-deep)] bg-[color:var(--color-parchment-soft)] p-6 md:p-10 reveal reveal--scale"
+      data-reveal-delay="180"
     >
       <div class="flex flex-col md:flex-row md:items-start gap-8 md:gap-10">
         {/* QR — slot фиксированной ширины, чтобы не плыл на мобиле */}
@@ -72,7 +73,7 @@ const sup = t.support;
             type="button"
             data-default-label={sup.copy_btn}
             data-copied-label={sup.copy_btn_copied}
-            class="mt-4 inline-flex items-center gap-2 rounded-md border border-[color:var(--color-burgundy)] bg-[color:var(--color-burgundy)] text-[color:var(--color-parchment)] px-5 py-2.5 text-sm font-sans font-medium uppercase tracking-widest hover:bg-[color:var(--color-burgundy-light)] hover:border-[color:var(--color-burgundy-light)] transition-colors"
+            class="cta-button btn mt-4 inline-flex items-center gap-2 rounded-md border border-[color:var(--color-burgundy)] bg-[color:var(--color-burgundy)] text-[color:var(--color-parchment)] px-5 py-2.5 text-sm font-sans font-medium uppercase tracking-widest hover:bg-[color:var(--color-burgundy-light)] hover:border-[color:var(--color-burgundy-light)] transition-colors"
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
