@@ -73,9 +73,16 @@ const defaultTab = locale === "uk" ? "uk" : locale === "en" ? "en" : "ru";
       <h2 class="anthem-h2">Гимн Дома Грозновых</h2>
 
       <figure class="anthem-audio-wrap">
-        <figcaption class="anthem-audio-label">{t.anthem.audio_label}</figcaption>
-        <audio controls preload="none" class="anthem-audio" src="/anthems/ru.mp3">
+        <figcaption class="anthem-audio-label">{t.anthem.audio_section_label}</figcaption>
+        <div class="anthem-audio-switch" role="tablist" aria-label={t.anthem.audio_switch_aria}>
+          <button type="button" role="tab" data-audio-version="tts" aria-selected="true" class="anthem-audio-btn anthem-audio-btn--active">{t.anthem.audio_btn_tts}</button>
+          <button type="button" role="tab" data-audio-version="music" aria-selected="false" class="anthem-audio-btn">{t.anthem.audio_btn_music}</button>
+        </div>
+        <audio controls preload="none" class="anthem-audio" data-audio-version="tts" src="/anthems/ru.mp3">
           {t.anthem.audio_unsupported} <a href="/anthems/ru.mp3" download>ru.mp3</a>
+        </audio>
+        <audio controls preload="none" class="anthem-audio anthem-audio--hidden" data-audio-version="music" src="/anthems/ru_music.mp3">
+          {t.anthem.audio_unsupported} <a href="/anthems/ru_music.mp3" download>ru_music.mp3</a>
         </audio>
       </figure>
 
@@ -141,9 +148,16 @@ const defaultTab = locale === "uk" ? "uk" : locale === "en" ? "en" : "ru";
       <h2 class="anthem-h2">Гімн Дому Грознових</h2>
 
       <figure class="anthem-audio-wrap">
-        <figcaption class="anthem-audio-label">{t.anthem.audio_label}</figcaption>
-        <audio controls preload="none" class="anthem-audio" src="/anthems/uk.mp3">
+        <figcaption class="anthem-audio-label">{t.anthem.audio_section_label}</figcaption>
+        <div class="anthem-audio-switch" role="tablist" aria-label={t.anthem.audio_switch_aria}>
+          <button type="button" role="tab" data-audio-version="tts" aria-selected="true" class="anthem-audio-btn anthem-audio-btn--active">{t.anthem.audio_btn_tts}</button>
+          <button type="button" role="tab" data-audio-version="music" aria-selected="false" class="anthem-audio-btn">{t.anthem.audio_btn_music}</button>
+        </div>
+        <audio controls preload="none" class="anthem-audio" data-audio-version="tts" src="/anthems/uk.mp3">
           {t.anthem.audio_unsupported} <a href="/anthems/uk.mp3" download>uk.mp3</a>
+        </audio>
+        <audio controls preload="none" class="anthem-audio anthem-audio--hidden" data-audio-version="music" src="/anthems/uk_music.mp3">
+          {t.anthem.audio_unsupported} <a href="/anthems/uk_music.mp3" download>uk_music.mp3</a>
         </audio>
       </figure>
 
@@ -209,9 +223,16 @@ const defaultTab = locale === "uk" ? "uk" : locale === "en" ? "en" : "ru";
       <h2 class="anthem-h2">Anthem of the House of Groznov</h2>
 
       <figure class="anthem-audio-wrap">
-        <figcaption class="anthem-audio-label">{t.anthem.audio_label}</figcaption>
-        <audio controls preload="none" class="anthem-audio" src="/anthems/en.mp3">
+        <figcaption class="anthem-audio-label">{t.anthem.audio_section_label}</figcaption>
+        <div class="anthem-audio-switch" role="tablist" aria-label={t.anthem.audio_switch_aria}>
+          <button type="button" role="tab" data-audio-version="tts" aria-selected="true" class="anthem-audio-btn anthem-audio-btn--active">{t.anthem.audio_btn_tts}</button>
+          <button type="button" role="tab" data-audio-version="music" aria-selected="false" class="anthem-audio-btn">{t.anthem.audio_btn_music}</button>
+        </div>
+        <audio controls preload="none" class="anthem-audio" data-audio-version="tts" src="/anthems/en.mp3">
           {t.anthem.audio_unsupported} <a href="/anthems/en.mp3" download>en.mp3</a>
+        </audio>
+        <audio controls preload="none" class="anthem-audio anthem-audio--hidden" data-audio-version="music" src="/anthems/en_music.mp3">
+          {t.anthem.audio_unsupported} <a href="/anthems/en_music.mp3" download>en_music.mp3</a>
         </audio>
       </figure>
 
@@ -501,6 +522,51 @@ const defaultTab = locale === "uk" ? "uk" : locale === "en" ? "en" : "ru";
     accent-color: var(--color-burgundy);
   }
 
+  .anthem-audio--hidden { display: none; }
+
+  /* Переключатель TTS / Music — две маленьких кнопки между label и плеером.
+     Стиль повторяет language tabs (anthem-tab) в миниатюре. */
+  .anthem-audio-switch {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+
+  .anthem-audio-btn {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 12px;
+    padding: 5px 14px;
+    background: transparent;
+    color: var(--color-ink);
+    border: 1px solid color-mix(in srgb, var(--color-gold-deep) 40%, transparent);
+    border-radius: 2px;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition:
+      background-color var(--anim-fast) var(--ease-out),
+      color var(--anim-fast) var(--ease-out),
+      border-color var(--anim-fast) var(--ease-out),
+      transform 120ms var(--ease-out);
+  }
+
+  .anthem-audio-btn:active { transform: scale(0.96); }
+
+  @media (hover: hover) and (pointer: fine) {
+    .anthem-audio-btn:hover {
+      border-color: var(--color-gold-deep);
+      background: color-mix(in srgb, var(--color-gold) 8%, transparent);
+    }
+  }
+
+  .anthem-audio-btn--active {
+    background: var(--color-burgundy);
+    color: var(--color-parchment);
+    border-color: var(--color-burgundy);
+  }
+
   /* Stanzas — раскрываются по очереди когда панель активна.
      Каждая stanza — отдельная задержка, мелкий stagger. */
   .anthem-stanza {
@@ -628,6 +694,9 @@ const defaultTab = locale === "uk" ? "uk" : locale === "en" ? "en" : "ru";
         p.setAttribute("aria-hidden", on ? "false" : "true");
         p.classList.toggle("anthem-panel--active", on);
       });
+      // Pause all audio при смене языка — чтобы не играли overlapping треки
+      // из неактивных панелей.
+      document.querySelectorAll<HTMLAudioElement>(".anthem-audio").forEach(a => a.pause());
     }
 
     tabs.forEach((tab) => {
@@ -636,6 +705,43 @@ const defaultTab = locale === "uk" ? "uk" : locale === "en" ? "en" : "ru";
         if (!code) return;
         activate(code);
         try { localStorage.setItem(STORAGE_KEY, code); } catch {}
+      });
+    });
+
+    // --------------------------------------------------------------
+    // Audio version switch: TTS ↔ Music. Global — выбор сохраняется
+    // при переключении языков и между визитами.
+    // --------------------------------------------------------------
+    const AUDIO_STORAGE_KEY = "groznov.anthem.audio_version";
+    const VALID_VERSIONS = ["tts", "music"] as const;
+    type AudioVersion = (typeof VALID_VERSIONS)[number];
+
+    let activeVersion: AudioVersion =
+      (localStorage.getItem(AUDIO_STORAGE_KEY) as AudioVersion) || "tts";
+    if (!VALID_VERSIONS.includes(activeVersion)) activeVersion = "tts";
+
+    function applyAudioVersion(version: AudioVersion) {
+      document.querySelectorAll<HTMLButtonElement>(".anthem-audio-btn").forEach(btn => {
+        const on = btn.dataset.audioVersion === version;
+        btn.setAttribute("aria-selected", on ? "true" : "false");
+        btn.classList.toggle("anthem-audio-btn--active", on);
+      });
+      document.querySelectorAll<HTMLAudioElement>(".anthem-audio").forEach(audio => {
+        const on = audio.dataset.audioVersion === version;
+        audio.classList.toggle("anthem-audio--hidden", !on);
+        if (!on) audio.pause();
+      });
+    }
+
+    applyAudioVersion(activeVersion);
+
+    document.querySelectorAll<HTMLButtonElement>(".anthem-audio-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const v = btn.dataset.audioVersion as AudioVersion;
+        if (!VALID_VERSIONS.includes(v)) return;
+        activeVersion = v;
+        try { localStorage.setItem(AUDIO_STORAGE_KEY, v); } catch {}
+        applyAudioVersion(v);
       });
     });
   });
