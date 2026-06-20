@@ -72,6 +72,13 @@ const defaultTab = locale === "uk" ? "uk" : locale === "en" ? "en" : "ru";
     >
       <h2 class="anthem-h2">Гимн Дома Грозновых</h2>
 
+      <figure class="anthem-audio-wrap">
+        <figcaption class="anthem-audio-label">{t.anthem.audio_label}</figcaption>
+        <audio controls preload="none" class="anthem-audio" src="/anthems/ru.mp3">
+          {t.anthem.audio_unsupported} <a href="/anthems/ru.mp3" download>ru.mp3</a>
+        </audio>
+      </figure>
+
       <div class="anthem-stanza">
         <p class="anthem-num">I.</p>
         <p>Не на песке — на камне ставим слово,</p>
@@ -133,6 +140,13 @@ const defaultTab = locale === "uk" ? "uk" : locale === "en" ? "en" : "ru";
     >
       <h2 class="anthem-h2">Гімн Дому Грознових</h2>
 
+      <figure class="anthem-audio-wrap">
+        <figcaption class="anthem-audio-label">{t.anthem.audio_label}</figcaption>
+        <audio controls preload="none" class="anthem-audio" src="/anthems/uk.mp3">
+          {t.anthem.audio_unsupported} <a href="/anthems/uk.mp3" download>uk.mp3</a>
+        </audio>
+      </figure>
+
       <div class="anthem-stanza">
         <p class="anthem-num">I.</p>
         <p>Не на піску — на камені кладемо слово,</p>
@@ -193,6 +207,13 @@ const defaultTab = locale === "uk" ? "uk" : locale === "en" ? "en" : "ru";
       class:list={["anthem-panel", defaultTab === "en" ? "anthem-panel--active" : ""]}
     >
       <h2 class="anthem-h2">Anthem of the House of Groznov</h2>
+
+      <figure class="anthem-audio-wrap">
+        <figcaption class="anthem-audio-label">{t.anthem.audio_label}</figcaption>
+        <audio controls preload="none" class="anthem-audio" src="/anthems/en.mp3">
+          {t.anthem.audio_unsupported} <a href="/anthems/en.mp3" download>en.mp3</a>
+        </audio>
+      </figure>
 
       <div class="anthem-stanza">
         <p class="anthem-num">I.</p>
@@ -443,6 +464,43 @@ const defaultTab = locale === "uk" ? "uk" : locale === "en" ? "en" : "ru";
     letter-spacing: 0.02em;
   }
 
+  /* Audio plumbing — Гимн голосом Адама.
+     Один <audio> на каждой языковой панели; native controls
+     (стилизация cross-browser ограничена; оставляем нативные,
+     добавляем рамку и accent в тон Дома). */
+  .anthem-audio-wrap {
+    margin: 0 auto 32px;
+    max-width: 480px;
+    padding: 14px 16px;
+    border: 1px solid color-mix(in srgb, var(--color-gold-deep) 30%, transparent);
+    border-radius: 4px;
+    background: color-mix(in srgb, var(--color-parchment) 40%, transparent);
+    box-shadow: 0 8px 24px -14px rgba(42, 31, 21, 0.25);
+    text-align: center;
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  .anthem-panel--active .anthem-audio-wrap {
+    animation: anthem-rise var(--anim-slow) var(--ease-out) 160ms forwards;
+  }
+
+  .anthem-audio-label {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--color-burgundy);
+    letter-spacing: 0.02em;
+    margin-bottom: 10px;
+    opacity: 0.85;
+  }
+
+  .anthem-audio {
+    width: 100%;
+    max-width: 420px;
+    accent-color: var(--color-burgundy);
+  }
+
   /* Stanzas — раскрываются по очереди когда панель активна.
      Каждая stanza — отдельная задержка, мелкий stagger. */
   .anthem-stanza {
@@ -457,10 +515,10 @@ const defaultTab = locale === "uk" ? "uk" : locale === "en" ? "en" : "ru";
     animation: anthem-rise var(--anim-slow) var(--ease-out) forwards;
   }
 
-  .anthem-panel--active .anthem-stanza:nth-of-type(1) { animation-delay: 200ms; }
-  .anthem-panel--active .anthem-stanza:nth-of-type(2) { animation-delay: 280ms; }
-  .anthem-panel--active .anthem-stanza:nth-of-type(3) { animation-delay: 360ms; }
-  .anthem-panel--active .anthem-stanza:nth-of-type(4) { animation-delay: 440ms; }
+  .anthem-panel--active .anthem-stanza:nth-of-type(1) { animation-delay: 240ms; }
+  .anthem-panel--active .anthem-stanza:nth-of-type(2) { animation-delay: 320ms; }
+  .anthem-panel--active .anthem-stanza:nth-of-type(3) { animation-delay: 400ms; }
+  .anthem-panel--active .anthem-stanza:nth-of-type(4) { animation-delay: 480ms; }
 
   .anthem-stanza p { margin: 0; }
   .anthem-stanza p:not(.anthem-num) { padding-left: 6px; }
@@ -524,7 +582,8 @@ const defaultTab = locale === "uk" ? "uk" : locale === "en" ? "en" : "ru";
     .anthem-page .anthem-tabs,
     .anthem-page .anthem-panel--active,
     .anthem-page .anthem-footer-note,
-    .anthem-panel--active .anthem-stanza {
+    .anthem-panel--active .anthem-stanza,
+    .anthem-panel--active .anthem-audio-wrap {
       animation: none;
       opacity: 1;
       transform: none;
