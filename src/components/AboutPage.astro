@@ -5,7 +5,7 @@
 interface Props { t: any; locale: "uk" | "en" | "ru" }
 const { t, locale } = Astro.props;
 
-const localePrefix = locale === "uk" ? "" : "/" + locale;
+const localePrefix = locale === "en" ? "" : "/" + locale;
 
 const ab = t.about;
 

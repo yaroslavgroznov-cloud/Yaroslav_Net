@@ -6,8 +6,8 @@ export default defineConfig({
   site: 'https://groznov.net',
   trailingSlash: 'never',
   i18n: {
-    defaultLocale: 'uk',
-    locales: ['uk', 'en', 'ru'],
+    defaultLocale: 'en',
+    locales: ['en', 'ru', 'uk'],
     routing: {
       prefixDefaultLocale: false,
     },
@@ -15,8 +15,8 @@ export default defineConfig({
   integrations: [
     sitemap({
       i18n: {
-        defaultLocale: 'uk',
-        locales: { uk: 'uk-UA', en: 'en-US', ru: 'ru-RU' },
+        defaultLocale: 'en',
+        locales: { en: 'en-US', ru: 'ru-RU', uk: 'uk-UA' },
       },
     }),
   ],

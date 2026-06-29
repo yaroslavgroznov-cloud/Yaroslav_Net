@@ -10,9 +10,9 @@ const { current, path = "/" } = Astro.props;
 const tail = path === "/" ? "" : path;
 
 const links: Array<{ code: Locale; label: string; href: string }> = [
-  { code: "uk", label: "UA", href: `/${tail.replace(/^\//, "")}` },
-  { code: "en", label: "EN", href: `/en${tail}` },
+  { code: "en", label: "EN", href: `/${tail.replace(/^\//, "")}` },
   { code: "ru", label: "RU", href: `/ru${tail}` },
+  { code: "uk", label: "UA", href: `/uk${tail}` },
 ];
 ---
 

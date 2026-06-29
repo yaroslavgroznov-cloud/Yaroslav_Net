@@ -2,7 +2,7 @@
 import type { Locale } from "../layouts/BaseLayout.astro";
 interface Props { t: any; locale: Locale; }
 const { t, locale } = Astro.props;
-const prefix = locale === "uk" ? "" : `/${locale}`;
+const prefix = locale === "en" ? "" : `/${locale}`;
 const p = t.oracle_page;
 ---
 

@@ -3,7 +3,7 @@ interface Props { t: any; locale: "uk" | "en" | "ru"; }
 const { t, locale } = Astro.props;
 
 // Префикс локали для путей внутри сайта: uk — корень, остальные — /en, /ru.
-const localePrefix = locale === "uk" ? "" : "/" + locale;
+const localePrefix = locale === "en" ? "" : "/" + locale;
 
 const items = [
   { label: t.contact.press,    value: "press@groznov.net",   href: "mailto:press@groznov.net" },

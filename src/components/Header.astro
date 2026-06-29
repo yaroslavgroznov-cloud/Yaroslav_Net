@@ -10,7 +10,7 @@ interface Props {
 }
 
 const { locale, t, path = "/" } = Astro.props;
-const prefix = locale === "uk" ? "" : `/${locale}`;
+const prefix = locale === "en" ? "" : `/${locale}`;
 ---
 
 <header class="border-b border-[color:var(--color-parchment-deep)] bg-[color:var(--color-parchment-soft)]/70 backdrop-blur-sm sticky top-0 z-10">
