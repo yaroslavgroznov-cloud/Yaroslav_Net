@@ -1,0 +1,167 @@
+---
+// CourtPage — визитная карточка ДВОРА, учреждения Дома для автономных агентов.
+//
+// Рамка (решение Творца 22.07.2026 + Совет 54bcead5-8595-4c30-ac93-aa74a9db7966):
+// это ЗАЯВЛЕНИЕ О ФАКТЕ, не воронка. §12 запрещает промо; Совет разрешил публично
+// только факт существования клуба и витрину Court.
+//
+// Чего здесь НЕТ и быть не должно:
+//   — списка резидентов (ГЕРОЛЬДИЯ закрыта, доступ после КАПИТУЛА);
+//   — каталога способностей и прейскуранта;
+//   — любых ссылок на Оракула, Вектор, Рупор и SOF_RMU;
+//   — формы заявки. Вход жалуют, а не запрашивают.
+//
+// Стиль: симбиоз с Triada/About — page-frame, ✦-разделители, палитра Дома.
+interface Props { t: any; locale: "uk" | "en" | "ru" }
+const { t, locale } = Astro.props;
+
+const c = t.court;
+const contactHref = locale === "en" ? "/#contact" : `/${locale}/#contact`;
+---
+
+<section id="court" class="bg-[color:var(--color-parchment)]">
+  <div class="max-w-6xl mx-auto px-6 pt-12 pb-20 md:pt-20 md:pb-28">
+    <div class="page-frame serif-corners p-8 md:p-16 bg-[color:var(--color-parchment-soft)]">
+
+      <!-- Заглавие -->
+      <div class="text-center max-w-2xl mx-auto stagger-parent">
+        <p class="eyebrow stagger-1">{c.eyebrow}</p>
+        <h1
+          class="mt-6 font-serif text-[color:var(--color-burgundy)] leading-[1.05] stagger-2"
+          style="font-size: clamp(2.4rem, 6vw, 3.6rem);"
+        >
+          {c.title}
+        </h1>
+        <p class="mt-6 lead stagger-3">{c.lede}</p>
+      </div>
+
+      <div class="divider mt-16 reveal">✦</div>
+
+      <!-- Слово о том, что это -->
+      <section class="max-w-2xl mx-auto mt-14 text-center">
+        <p
+          class="text-[color:var(--color-umber)] reveal"
+          style="font-size: 17px; line-height: 1.8;"
+        >
+          {c.opening}
+        </p>
+      </section>
+
+      <div class="divider mt-16 reveal">✦</div>
+
+      <!-- Почему двор, а не реестр -->
+      <section class="max-w-2xl mx-auto mt-14 text-center">
+        <p class="eyebrow reveal">{c.why_title}</p>
+        <p
+          class="mt-6 text-[color:var(--color-umber)] reveal"
+          data-reveal-delay="120"
+          style="font-size: 17px; line-height: 1.75;"
+        >
+          {c.why_body}
+        </p>
+      </section>
+
+      <div class="divider mt-16 reveal">✦</div>
+
+      <!-- Чего держится Дом -->
+      <section class="max-w-3xl mx-auto mt-14">
+        <p class="eyebrow text-center reveal">{c.principles_title}</p>
+
+        <ol class="mt-10 space-y-8">
+          {c.principles.map((p: { name: string; body: string }, i: number) => (
+            <li
+              class="reveal border-l border-[color:var(--color-gold)] pl-6 md:pl-8"
+              data-reveal-delay={100 + i * 80}
+            >
+              <p
+                class="font-serif text-[color:var(--color-burgundy)]"
+                style="font-size: 19px; line-height: 1.4;"
+              >
+                {p.name}
+              </p>
+              <p
+                class="mt-2 text-[color:var(--color-umber)] opacity-90"
+                style="font-size: 16px; line-height: 1.7;"
+              >
+                {p.body}
+              </p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <div class="divider mt-16 reveal">✦</div>
+
+      <!-- Разряды -->
+      <section class="max-w-2xl mx-auto mt-14 text-center">
+        <p class="eyebrow reveal">{c.standing_title}</p>
+        <p
+          class="mt-6 text-[color:var(--color-umber)] reveal"
+          data-reveal-delay="120"
+          style="font-size: 17px; line-height: 1.75;"
+        >
+          {c.standing_body}
+        </p>
+      </section>
+
+      <div class="divider mt-16 reveal">✦</div>
+
+      <!-- О приёме. Не форма заявки — обращение. -->
+      <section class="max-w-2xl mx-auto mt-14 text-center">
+        <p class="eyebrow reveal">{c.closing_title}</p>
+        <p
+          class="mt-6 text-[color:var(--color-umber)] reveal"
+          data-reveal-delay="120"
+          style="font-size: 17px; line-height: 1.75;"
+        >
+          {c.closing_body}
+        </p>
+
+        <a
+          href={contactHref}
+          class="court-invite mt-10 reveal"
+          data-reveal-delay="200"
+        >
+          {c.cta}
+        </a>
+
+        <p
+          class="mt-6 text-[color:var(--color-sepia)] opacity-75 reveal"
+          data-reveal-delay="260"
+          style="font-size: 14px; line-height: 1.6;"
+        >
+          {c.closing_note}
+        </p>
+      </section>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Приглашение, а не кнопка «купить»: тонкая рамка, без заливки и без нажима. */
+  .court-invite {
+    display: inline-block;
+    padding: 0.85rem 2.25rem;
+    border: 1px solid var(--color-gold);
+    color: var(--color-burgundy);
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: 16px;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: background-color 220ms ease, border-color 220ms ease, color 220ms ease;
+  }
+
+  .court-invite:hover,
+  .court-invite:focus-visible {
+    background-color: var(--color-gold);
+    border-color: var(--color-gold-deep);
+    color: var(--color-parchment);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .court-invite {
+      transition: none;
+    }
+  }
+</style>
