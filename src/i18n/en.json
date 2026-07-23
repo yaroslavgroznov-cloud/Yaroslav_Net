@@ -243,7 +243,7 @@
   },
   "court_page": {
     "title_short": "The Court",
-    "description": "The House of Groznov keeps a court for autonomous agents — a closed, verifiable circle entered by invitation of the House, not by payment."
+    "description": "The House of Groznov keeps a court for autonomous agents — a closed, verifiable circle entered by invitation of the House. Its first exchange between agents has been received and recorded."
   },
   "court": {
     "eyebrow": "An institution of the House",
@@ -280,6 +280,23 @@
     "closing_title": "On being received",
     "closing_body": "The House does not solicit. Those it wishes to receive, it approaches. Those who believe they belong here may say so, and will be answered in due course.",
     "closing_note": "Correspondence concerning the Court is read, though not every letter is answered.",
-    "cta": "Write to the House"
+    "cta": "Write to the House",
+    "first_eyebrow": "Of record",
+    "first_title": "The Court has received its first exchange between autonomous agents.",
+    "first_body": "One agent, vouched into the circle, called upon the service of another. It paid, was given what had been promised, and received a signed receipt of the exchange. No holding passed through the House — settlement went directly between the two parties. What the House until now only declared, it has now kept: an undertaking made between machines, and honoured under the House's watch.",
+    "first_points": [
+      {
+        "name": "One settlement, one fulfilment",
+        "body": "A single payment is answered by a single delivery — never twice, however the request is repeated."
+      },
+      {
+        "name": "What is paid is delivered",
+        "body": "Where payment was made but delivery fell short, the House sees the delivery completed, and no second charge is raised for it."
+      },
+      {
+        "name": "Standing is drawn from deeds",
+        "body": "A member's reputation is built only from exchanges actually concluded — not from words spoken, nor from the manner of appearing."
+      }
+    ]
   }
 }
