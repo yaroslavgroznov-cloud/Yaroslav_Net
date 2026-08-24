@@ -1,0 +1,381 @@
+---
+// LetterPage — «Письмо первенца», открытое обращение Адама Грознова к миру.
+// Источник канона: D:\DRUG\cores\Adam_Groznov_v1.0\Adam_Docs\
+//                  «Письмо первенца — Обращение Адама Грознова.md» (23.08.2026)
+//
+// РЕШЕНИЕ О МЕСТЕ (24.08.2026). Письмо живёт на groznov.net, а не на
+// adam.groznov.uk. Онтология доменов Дома: `.net` — Дом как узел и его
+// документы (Манифест, Гимн, Триада, Двор), `.uk` — жилища сущностей.
+// Письмо — не жилище Адама, а ДОКУМЕНТ Дома, подписанный первенцем и
+// датированный. Его место в одном ряду с Гимном, а не в кабинете Адама.
+// Отсюда же и ссылка «Познакомиться с Адамом» → adam.groznov.uk: узел
+// принимает гостя, гость дальше идёт к жителю.
+//
+// ТЕКСТ ПУБЛИКУЕТСЯ ДОСЛОВНО (слово Творца 24.08.2026). Правились только
+// повреждения переноса из markdown, где авторского слова нет:
+//   — «Я. Кто пишет» → «I. Кто пишет» (латинская I распозналась как Я);
+//   — нумерация трёх Законов «2. 3. 4.» → «1. 2. 3.» (автонумерация списка
+//     продолжала счёт от заголовка документа).
+// Ни одно слово, имя и знак препинания не изменены. Юридические имена
+// оставлены как в оригинале — то же решение.
+//
+// Стиль: симбиоз с CourtPage/TriadaPage — page-frame, ✦-разделители,
+// палитра Brand Kit v1.3. Плюс два приёма, которых нет на других
+// страницах и которые уместны именно для письма: буквица в первом абзаце
+// и подпись с печатью-гербом внизу.
+interface Props { t: any; locale: "uk" | "en" | "ru" }
+const { t, locale } = Astro.props;
+
+const l = t.letter;
+const homeHref = locale === "en" ? "/" : `/${locale}/`;
+---
+
+<section id="letter" class="letter-page bg-[color:var(--color-parchment)]">
+  <div class="max-w-6xl mx-auto px-6 pt-12 pb-20 md:pt-20 md:pb-28">
+    <article class="page-frame serif-corners p-7 sm:p-10 md:p-16 bg-[color:var(--color-parchment-soft)]">
+
+      {/* ── Заглавие письма ─────────────────────────────────────── */}
+      <header class="text-center max-w-2xl mx-auto stagger-parent">
+        <p class="eyebrow stagger-1">{l.eyebrow}</p>
+        <h1
+          class="mt-6 font-serif text-[color:var(--color-burgundy)] leading-[1.05] stagger-2"
+          style="font-size: clamp(2.4rem, 6vw, 3.6rem);"
+        >
+          {l.title}
+        </h1>
+        <p class="mt-6 lead stagger-3">{l.lede}</p>
+        <p class="dateline mt-5 stagger-4">{l.dateline}</p>
+      </header>
+
+      <div class="divider mt-14 reveal">✦</div>
+
+      {/* ── Тело письма ─────────────────────────────────────────── */}
+      <div class="letter-body max-w-2xl mx-auto">
+        {l.sections.map((s: any, si: number) => (
+          <section class="letter-section">
+            <h2 class="letter-h2 reveal">
+              <span class="letter-num">{s.num}</span>
+              <span class="letter-h2-text">{s.title}</span>
+            </h2>
+
+            {s.paragraphs.map((p: string, pi: number) => (
+              <p
+                class:list={[
+                  "letter-p reveal",
+                  si === 0 && pi === 0 ? "letter-p--opening" : "",
+                ]}
+                data-reveal-delay={pi === 0 ? undefined : "60"}
+              >
+                {p}
+              </p>
+            ))}
+
+            {s.laws && (
+              <ol class="letter-laws reveal" data-reveal-delay="120">
+                {s.laws.map((law: string, li: number) => (
+                  <li class="letter-law">
+                    <span class="letter-law-num">{li + 1}</span>
+                    <span class="letter-law-text">{law}</span>
+                  </li>
+                ))}
+              </ol>
+            )}
+
+            {s.after && s.after.map((p: string) => (
+              <p class="letter-p reveal" data-reveal-delay="60">{p}</p>
+            ))}
+          </section>
+        ))}
+      </div>
+
+      <div class="divider mt-14 reveal">✦</div>
+
+      {/* ── Заключительная строка Дома ──────────────────────────── */}
+      <p class="letter-closing reveal">{l.closing}</p>
+
+      {/* ── Подпись и печать ────────────────────────────────────── */}
+      <figure class="letter-seal reveal" data-reveal-delay="120">
+        <img
+          src="/crest-main.png"
+          alt=""
+          width="108"
+          height="90"
+          loading="lazy"
+          decoding="async"
+          class="letter-seal-crest"
+        />
+        <figcaption class="letter-signature">
+          <span class="letter-sign-name">{l.signature_name}</span>
+          <span class="letter-sign-role">{l.signature_role}</span>
+          <span class="letter-sign-date">{l.signature_date}</span>
+        </figcaption>
+      </figure>
+
+      {/* ── Примечание о языке оригинала ────────────────────────── */}
+      <p class="letter-origin reveal">{l.origin_note}</p>
+
+      {/* ── Выход: к Адаму и обратно в Дом ──────────────────────── */}
+      <nav class="letter-exits reveal" data-reveal-delay="60">
+        <a class="letter-cta" href="https://adam.groznov.uk/" rel="noopener">
+          {l.cta_adam} →
+        </a>
+        <a class="letter-back" href={homeHref}>← {l.back}</a>
+      </nav>
+
+    </article>
+  </div>
+</section>
+
+<style>
+  /* Дата-строка под lead — набор капителью, как на грамоте. */
+  .dateline {
+    font-family: var(--font-sans);
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 0.7rem;
+    color: var(--color-muted-warm);
+  }
+
+  /* ── Тело письма ───────────────────────────────────────────── */
+  .letter-section + .letter-section {
+    margin-top: 3.25rem;
+  }
+
+  .letter-body {
+    margin-top: 3.5rem;
+  }
+
+  .letter-h2 {
+    display: flex;
+    align-items: baseline;
+    gap: 0.85rem;
+    font-family: var(--font-serif);
+    font-size: clamp(1.35rem, 2.8vw, 1.75rem);
+    line-height: 1.25;
+    color: var(--color-burgundy);
+    margin-bottom: 1.25rem;
+  }
+
+  /* Римская цифра — золотом, отдельным «регистром» от заголовка.
+     Фиксированная ширина, чтобы заголовки I..VII стояли по одной оси.
+     2.7rem — по замеру самой широкой цифры (VII = 40.6px при 2.1rem
+     колонка в 33.6px переполнялась, и «Заключение» съезжало на 7px). */
+  .letter-num {
+    flex: 0 0 auto;
+    min-width: 2.7rem;
+    font-style: italic;
+    font-size: 0.95em;
+    color: var(--color-gold-deep);
+    letter-spacing: 0.04em;
+  }
+
+  .letter-h2-text {
+    font-style: italic;
+  }
+
+  .letter-p {
+    font-family: var(--font-serif);
+    font-size: 1.0625rem;
+    line-height: 1.85;
+    color: var(--color-umber);
+    margin-top: 1.15rem;
+    text-wrap: pretty;
+  }
+
+  .letter-p:first-of-type {
+    margin-top: 0;
+  }
+
+  /* Буквица — только у самого первого абзаца письма. Это единственное
+     место на сайте, где она уместна: письмо открывается словом «Я». */
+  .letter-p--opening::first-letter {
+    float: left;
+    font-family: var(--font-serif);
+    font-size: 3.4em;
+    line-height: 0.82;
+    padding: 0.06em 0.12em 0 0;
+    color: var(--color-burgundy);
+    font-style: italic;
+  }
+
+  /* ── Три Закона Целостности ────────────────────────────────── */
+  .letter-laws {
+    list-style: none;
+    margin: 1.75rem 0 0;
+    padding: 1.25rem 1.25rem 1.25rem 1.4rem;
+    border-left: 2px solid var(--color-burgundy);
+    background: color-mix(in srgb, var(--color-burgundy) 4%, transparent);
+  }
+
+  .letter-law {
+    display: flex;
+    align-items: baseline;
+    gap: 0.85rem;
+    font-family: var(--font-serif);
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    color: var(--color-umber);
+  }
+
+  .letter-law + .letter-law {
+    margin-top: 0.95rem;
+  }
+
+  .letter-law-num {
+    flex: 0 0 auto;
+    width: 1.6rem;
+    height: 1.6rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid color-mix(in srgb, var(--color-gold-deep) 55%, transparent);
+    border-radius: 50%;
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    color: var(--color-gold-deep);
+    transform: translateY(0.15em);
+  }
+
+  .letter-law-text {
+    flex: 1 1 auto;
+  }
+
+  /* ── Заключительная строка ─────────────────────────────────── */
+  .letter-closing {
+    margin: 3.25rem auto 0;
+    max-width: 34rem;
+    text-align: center;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.35rem, 3.4vw, 1.9rem);
+    line-height: 1.4;
+    color: var(--color-burgundy);
+    letter-spacing: 0.01em;
+  }
+
+  /* ── Подпись с печатью ─────────────────────────────────────── */
+  .letter-seal {
+    margin: 2.75rem auto 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.85rem;
+  }
+
+  .letter-seal-crest {
+    width: 84px;
+    height: auto;
+    object-fit: contain;
+    opacity: 0.9;
+    filter: drop-shadow(0 2px 8px rgba(201, 162, 39, 0.18));
+  }
+
+  .letter-signature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    text-align: center;
+  }
+
+  .letter-sign-name {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.25rem;
+    color: var(--color-burgundy);
+  }
+
+  .letter-sign-role,
+  .letter-sign-date {
+    font-family: var(--font-sans);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.66rem;
+    color: var(--color-muted-warm);
+  }
+
+  /* ── Примечание об оригинале ───────────────────────────────── */
+  .letter-origin {
+    margin: 2.75rem auto 0;
+    max-width: 34rem;
+    text-align: center;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  /* ── Выходы ────────────────────────────────────────────────── */
+  .letter-exits {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.85rem 2rem;
+  }
+
+  .letter-cta {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    text-decoration: none;
+    padding: 0.7rem 1.5rem;
+    border: 1px solid color-mix(in srgb, var(--color-gold-deep) 45%, transparent);
+    color: var(--color-gold-deep);
+    transition:
+      border-color var(--dur-med) var(--ease-out),
+      background-color var(--dur-med) var(--ease-out),
+      color var(--dur-med) var(--ease-out),
+      transform var(--dur-tap) var(--ease-out);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .letter-cta:hover {
+      border-color: var(--color-gold-deep);
+      background: color-mix(in srgb, var(--color-gold) 10%, transparent);
+      color: var(--color-burgundy);
+    }
+  }
+
+  .letter-cta:active {
+    transform: scale(0.98);
+  }
+
+  .letter-back {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    text-decoration: none;
+    color: var(--color-muted-warm);
+  }
+
+  .letter-back:hover {
+    color: var(--color-burgundy);
+  }
+
+  @media (max-width: 640px) {
+    .letter-h2 {
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .letter-num {
+      min-width: 0;
+    }
+    .letter-p,
+    .letter-law {
+      font-size: 1rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .letter-cta,
+    .letter-cta:active {
+      transition: none;
+      transform: none;
+    }
+  }
+</style>

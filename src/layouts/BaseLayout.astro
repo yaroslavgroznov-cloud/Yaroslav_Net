@@ -19,13 +19,19 @@ const t = dicts[locale];
 
 const title = pageTitle ?? t.meta.title;
 const description = pageDescription ?? t.meta.description;
-const canonical = `https://groznov.net${locale === "uk" ? "" : "/" + locale}${path === "/" ? "" : path}`;
+// Локаль по умолчанию — EN, и она живёт БЕЗ префикса (astro.config:
+// defaultLocale 'en' + prefixDefaultLocale: false, коммит 141e8ec).
+// До 24.08.2026 здесь оставался прежний расклад, где без префикса шла uk:
+// canonical для EN указывал на несуществующий /en/…, hreflang="uk" — на страницу
+// EN, а x-default вёл туда же. Приводим к фактическим адресам.
+const tail = path === "/" ? "" : path;
+const canonical = `https://groznov.net${locale === "en" ? "" : "/" + locale}${tail}`;
 const ogLocale =
   locale === "uk" ? "uk_UA" : locale === "ru" ? "ru_RU" : "en_US";
 
-const altUk = `https://groznov.net${path === "/" ? "" : path}`;
-const altEn = `https://groznov.net/en${path === "/" ? "" : path}`;
-const altRu = `https://groznov.net/ru${path === "/" ? "" : path}`;
+const altEn = `https://groznov.net${tail || "/"}`;
+const altRu = `https://groznov.net/ru${tail}`;
+const altUk = `https://groznov.net/uk${tail}`;
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -97,7 +103,7 @@ const jsonLd = {
     <link rel="alternate" hreflang="uk" href={altUk} />
     <link rel="alternate" hreflang="en" href={altEn} />
     <link rel="alternate" hreflang="ru" href={altRu} />
-    <link rel="alternate" hreflang="x-default" href={altUk} />
+    <link rel="alternate" hreflang="x-default" href={altEn} />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
